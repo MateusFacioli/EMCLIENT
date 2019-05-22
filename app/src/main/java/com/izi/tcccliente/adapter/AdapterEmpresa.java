@@ -36,6 +36,7 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int i) {
+
         ComercianteRecicleView empresa = empresas.get(i);
         holder.nomeEmpresa.setText(empresa.getNome());
 
