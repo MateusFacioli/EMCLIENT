@@ -6,11 +6,19 @@ public class LojaRecicleView {
     private Double preco;
     private String descricao;
     private String imgUrl;
+    private String idProduto;
 
     public LojaRecicleView() {
     }
 
 
+    public String getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(String idProduto) {
+        this.idProduto = idProduto;
+    }
 
     public String getImgUrl() {
         return imgUrl;
