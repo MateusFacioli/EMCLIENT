@@ -162,5 +162,6 @@ public class CadastrarActivity extends AppCompatActivity {
         txtTelefone = findViewById(R.id.txtTelefone);
         inputSenha = findViewById(R.id.inputSenha);
         mAuth = FirebaseAuth.getInstance();
+        btnFloatNext = findViewById(R.id.floatingNext);
     }
 }

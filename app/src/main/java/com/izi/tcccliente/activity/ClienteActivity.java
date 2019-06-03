@@ -1,5 +1,6 @@
 package com.izi.tcccliente.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,9 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.izi.tcccliente.R;
 import com.izi.tcccliente.adapter.AdapterEmpresa;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
+import com.izi.tcccliente.listener.RecyclerItemClickListener;
 import com.izi.tcccliente.model.ComercianteRecicleView;
 
 import java.util.ArrayList;
@@ -32,6 +37,8 @@ public class ClienteActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
 
     private AdapterEmpresa adapterRestaurante;
     private List<ComercianteRecicleView> restaurantes = new ArrayList<>();
@@ -42,8 +49,6 @@ public class ClienteActivity extends AppCompatActivity
         setContentView(R.layout.activity_cliente);
         inicializarComponentes();
         configuraRecicleView();
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         recuperarRestaurantesFirebase();
 
         /**
@@ -55,8 +60,40 @@ public class ClienteActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
          **/
-        navigationView.setNavigationItemSelectedListener(this);
+
+        recycleRestaurante.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        this,
+                        recycleRestaurante,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Intent loja = new Intent(ClienteActivity.this, LojaActivity.class);
+                                ComercianteRecicleView comercianteSelecionado = restaurantes.get(position);
+
+                                String uidComerciante = comercianteSelecionado.getUid();
+                                loja.putExtra("idComerciante", uidComerciante);
+                                startActivity(loja);
+
+
+
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
     }
+
+
 
     private void recuperarRestaurantesFirebase(){
 
@@ -70,6 +107,8 @@ public class ClienteActivity extends AppCompatActivity
                   for (DataSnapshot ds: dataSnapshot.getChildren()){
                       restaurantes.add( ds.getValue(ComercianteRecicleView.class) );
                   }
+
+
 
                   adapterRestaurante.notifyDataSetChanged();
 
@@ -153,5 +192,9 @@ public class ClienteActivity extends AppCompatActivity
         recycleRestaurante = findViewById(R.id.recicleRestaurante);
         mDatabase = ConfiguracaoFirebase.getFirebase();
         mAuth = ConfiguracaoFirebase.getFirebaseInstance();
+        drawer = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
+
 }
