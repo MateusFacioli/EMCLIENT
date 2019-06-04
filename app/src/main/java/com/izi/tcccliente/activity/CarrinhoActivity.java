@@ -7,6 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +51,8 @@ public class CarrinhoActivity extends AppCompatActivity {
 
     private FloatingActionButton floatPedido;
 
+    private Toolbar toolbar;
+
 
 
     @Override
@@ -57,25 +63,25 @@ public class CarrinhoActivity extends AppCompatActivity {
         configuraComponentes();
         recuperarProdutos();
 
+
+
         floatPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if(carrinho != null) {
-                    for (int i = 0; i <= carrinhos.size(); i++) {
+                    int i;
+                    for (i=0 ; i < carrinhos.size(); i++) {
                         carrinho = carrinhos.get(i);
                         carrinho.salvarPedido();
+                        carrinho.removerCarrinho();
+
                     }
-                    DatabaseReference carrinhoDeletar = FirebaseDatabase
-                            .getInstance()
-                            .getReference()
-                            .getRoot()
-                            .child("carrinho")
-                            .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
 
-                    carrinhoDeletar.removeValue();
+                    Intent inicio = new Intent(CarrinhoActivity.this, ClienteActivity.class);
+                    startActivity(inicio);
+                    finish();
                 }
-
 
 
             }
@@ -115,7 +121,28 @@ public class CarrinhoActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_carrinho, menu);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.menuContinuarComprando:
+                Intent loja = new Intent(CarrinhoActivity.this, LojaActivity.class);
+                loja.putExtra("idComerciante",idComerciante);
+                startActivity(loja);
+                finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void configuraComponentes(){
         recicleCarrinho.setLayoutManager(new LinearLayoutManager(this));
@@ -128,6 +155,11 @@ public class CarrinhoActivity extends AppCompatActivity {
             idProduto = bCarrinho.get("uidProduto").toString();
         }
 
+        toolbar.setTitle("Carrinho");
+        setSupportActionBar(toolbar);
+
+
+
     }
     private void inicializarComponentes(){
         recicleCarrinho = findViewById(R.id.recyclerCarrinho);
@@ -137,5 +169,8 @@ public class CarrinhoActivity extends AppCompatActivity {
         bCarrinho = iCarrinho.getExtras();
 
         floatPedido = findViewById(R.id.floatingPedido);
+
+        toolbar = findViewById(R.id.toolbar);
+
     }
 }

@@ -11,12 +11,20 @@ public class ComercianteRecicleView {
     private String email;
     private String telefone;
     private String senha;
+    private Localizacao localizacao;
 
 
 
     public ComercianteRecicleView() {
     }
 
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
+    }
 
     public String getUid() {
         return uid;

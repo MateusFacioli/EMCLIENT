@@ -97,18 +97,16 @@ public class ClienteActivity extends AppCompatActivity
 
     private void recuperarRestaurantesFirebase(){
 
-
-
          DatabaseReference retaurantesRef = mDatabase.child("comerciante");
           retaurantesRef.addValueEventListener(new ValueEventListener() {
               @Override
               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                   restaurantes.clear();
                   for (DataSnapshot ds: dataSnapshot.getChildren()){
-                      restaurantes.add( ds.getValue(ComercianteRecicleView.class) );
+                      if(ds.getValue(ComercianteRecicleView.class).getLocalizacao() != null) {
+                          restaurantes.add(ds.getValue(ComercianteRecicleView.class));
+                      }
                   }
-
-
 
                   adapterRestaurante.notifyDataSetChanged();
 

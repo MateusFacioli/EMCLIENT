@@ -13,6 +13,7 @@ public class Carrinho {
     private Cliente cliente;
     private LojaRecicleView produto;
     private String idpedido;
+    private String status;
 
 
 
@@ -35,6 +36,15 @@ public class Carrinho {
 
     }
 
+    public void removerCarrinho(){
+        DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();
+        DatabaseReference reference = database.child("carrinho")
+                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
+
+        reference.removeValue();
+
+    }
+
 
     public Carrinho() {
 
@@ -44,8 +54,13 @@ public class Carrinho {
         setIdpedido( produtoRef.push().getKey() );
     }
 
+    public String getStatus() {
+        return status;
+    }
 
-
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public String getIdpedido() {
         return idpedido;
