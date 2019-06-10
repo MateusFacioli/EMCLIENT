@@ -16,17 +16,13 @@ import android.view.View;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.izi.tcccliente.R;
 import com.izi.tcccliente.adapter.AdapterCarrinho;
-import com.izi.tcccliente.adapter.AdapterLoja;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
 import com.izi.tcccliente.model.Carrinho;
-import com.izi.tcccliente.model.Cliente;
-import com.izi.tcccliente.model.ComercianteRecicleView;
 import com.izi.tcccliente.model.LojaRecicleView;
 
 import java.util.ArrayList;
@@ -78,9 +74,11 @@ public class CarrinhoActivity extends AppCompatActivity {
 
                     }
 
-                    Intent inicio = new Intent(CarrinhoActivity.this, ClienteActivity.class);
+                    Intent inicio = new Intent(CarrinhoActivity.this, AcompanharPedidoActivity.class);
                     startActivity(inicio);
                     finish();
+                    Class<LojaActivity> loja = LojaActivity.class;
+
                 }
 
 
@@ -168,7 +166,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         iCarrinho = getIntent();
         bCarrinho = iCarrinho.getExtras();
 
-        floatPedido = findViewById(R.id.floatingPedido);
+        floatPedido = findViewById(R.id.floatingFinalizar);
 
         toolbar = findViewById(R.id.toolbar);
 

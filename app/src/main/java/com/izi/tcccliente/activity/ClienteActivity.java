@@ -164,7 +164,9 @@ public class ClienteActivity extends AppCompatActivity
             Intent carrinho = new Intent(ClienteActivity.this, CarrinhoActivity.class);
             startActivity(carrinho);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_pedidos) {
+            Intent pedidos = new Intent(ClienteActivity.this, AcompanharPedidoActivity.class);
+            startActivity(pedidos);
 
         } else if (id == R.id.nav_tools) {
 
