@@ -39,7 +39,8 @@ public class Carrinho {
     public void removerCarrinho(){
         DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();
         DatabaseReference reference = database.child("carrinho")
-                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
+                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid())
+                .child(getProduto().getIdProduto());
 
         reference.removeValue();
 

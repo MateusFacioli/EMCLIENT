@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +23,7 @@ import com.izi.tcccliente.R;
 import com.izi.tcccliente.adapter.AdapterCarrinho;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
+import com.izi.tcccliente.listener.RecyclerItemClickListener;
 import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.LojaRecicleView;
 
@@ -59,6 +61,31 @@ public class CarrinhoActivity extends AppCompatActivity {
         configuraComponentes();
         recuperarProdutos();
 
+
+        recicleCarrinho.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        this,
+                        recicleCarrinho,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                                Carrinho produtoSelecionado = carrinhos.get(position);
+                                produtoSelecionado.removerCarrinho();
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
 
 
         floatPedido.setOnClickListener(new View.OnClickListener() {

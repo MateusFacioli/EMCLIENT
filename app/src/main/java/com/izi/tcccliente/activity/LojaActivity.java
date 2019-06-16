@@ -85,6 +85,10 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
         recuperarUsuario();
        // getSupportActionBar().hide();
 
+        //String urlTopass = makeURL(latLngOld.latitude, latLngOld.longitude, latLng.latitude, latLng.longitude); // lat origem, lon origem, lat destino, lon destino
+
+       // new connectAsyncTask(urlTopass).execute();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync((OnMapReadyCallback) this);
@@ -215,6 +219,8 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
     }
+
+
 
     private void recuperarComerciante(){
         Query comercianteRef = mDatabase
