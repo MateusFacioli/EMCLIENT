@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TccCliente</string>
+    <string name="app_name">EasyMeal Cliente</string>
     <string name="FACEBOOK_APP_ID">512609889561731</string>
     <string name="ACCOUNT_KIT_CLIENT_TOKEN">794618cfdc0c994dcd9f9d0ab1270d14</string>
     <string name="title_activity_cliente">ClienteActivity</string>
