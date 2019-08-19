@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toolbar;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -65,12 +66,14 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Intent iLoja;
     private Bundle bLoja;
     private String idComerciante;
+    private Toolbar toolbar;
 
     private List<LojaRecicleView> lojaCarrinho = new ArrayList<>();
     private List<ComercianteRecicleView> comeciante = new ArrayList<>();
     private List<Cliente> usuario = new ArrayList<>();
     private Carrinho carrinho = new Carrinho();
     private Localizacao localizacao = new Localizacao();
+
 
 
 
@@ -296,6 +299,8 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void inicializarComponentes(){
         recycleLoja = findViewById(R.id.recyclerLoja);
         mDatabase = ConfiguracaoFirebase.getFirebase();
+        //toolbar = findViewById(R.id.toolbar_dados);
+        //toolbar.setTitle("Dados de "+idComerciante);
 
         iLoja = getIntent();
         bLoja = iLoja.getExtras();

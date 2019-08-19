@@ -3,6 +3,7 @@ package com.izi.tcccliente.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.view.GravityCompat;
@@ -39,6 +40,7 @@ public class ClienteActivity extends AppCompatActivity
     private DatabaseReference mDatabase;
     private DrawerLayout drawer;
     private NavigationView navigationView;
+    private FloatingActionButton btn_menu;
 
     private AdapterEmpresa adapterRestaurante;
     private List<ComercianteRecicleView> restaurantes = new ArrayList<>();
@@ -197,6 +199,7 @@ public class ClienteActivity extends AppCompatActivity
         drawer = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        btn_menu=findViewById(R.id.botao_menu);
     }
 
 }

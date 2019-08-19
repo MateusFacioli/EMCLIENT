@@ -60,10 +60,10 @@ public class AdapterLoja extends RecyclerView.Adapter<AdapterLoja.MyViewHolder> 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            imagemEmpresa = itemView.findViewById(R.id.imageEmpresa);
-            nomeProduto = itemView.findViewById(R.id.txtNomeProduto);
-            descricao = itemView.findViewById(R.id.txtDescricao);
-            valor = itemView.findViewById(R.id.txtPreco);
+            imagemEmpresa = itemView.findViewById(R.id.imageProdutoPedido);
+            nomeProduto = itemView.findViewById(R.id.txtNomeProdutoPedido);
+            descricao = itemView.findViewById(R.id.txtDescricaoPedido);
+            valor = itemView.findViewById(R.id.txtPrecoPedido);
         }
     }
 }

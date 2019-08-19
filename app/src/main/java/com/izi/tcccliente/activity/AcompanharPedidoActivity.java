@@ -95,8 +95,8 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
         recicleCarrinho.setAdapter(adapterPedidos);
 
 
-        toolbar.setTitle("Carrinho");
-        setSupportActionBar(toolbar);
+        //toolbar.setTitle("Carrinho");
+        //setSupportActionBar(toolbar);
 
 
 
@@ -108,7 +108,7 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
 
         floatFinalizar = findViewById(R.id.floatingFinalizar);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.tb_acompanha);
 
     }
 

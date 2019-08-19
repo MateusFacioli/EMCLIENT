@@ -6,40 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".activity.CarrinhoActivity">
 
-    <include
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <LinearLayout
-        android:id="@+id/linearReciclePedido"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reciclePedido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="484dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.120000005"
-        tools:ignore="MissingConstraints">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/reciclePedido"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/tb_acompanha"
+        app:layout_constraintVertical_bias="0.0" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingFinalizar"
@@ -60,5 +38,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.987"
         app:srcCompat="@drawable/ic_menu_send" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_acompanha"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001"
+        app:title="Acompanhe seus pedidos" />
 
 </android.support.constraint.ConstraintLayout>

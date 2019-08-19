@@ -195,7 +195,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         floatPedido = findViewById(R.id.floatingFinalizar);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar2);
 
     }
 }
