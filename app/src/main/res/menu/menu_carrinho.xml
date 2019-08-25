@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menuContinuarComprando"
-        android:icon="@drawable/ic_carrinho_store_black_24dp"
+        android:icon="@drawable/ic_carrinho"
         android:title="Continuar Comprando"
         app:showAsAction="always" />
 </menu>
