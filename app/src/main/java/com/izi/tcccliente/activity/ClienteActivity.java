@@ -53,7 +53,7 @@ public class ClienteActivity extends AppCompatActivity {
     private List<ComercianteRecicleView> restaurantes = new ArrayList<>();
 
     private static final int ANIMATION_DURATION = 300;
-    private static final float ROTATION_ANGLE = 180f;
+    private static final float ROTATION_ANGLE = 90f;
     private AnimatorSet mOpenAnimatorSet;
     private AnimatorSet mCloseAnimatorSet;
 
@@ -235,10 +235,10 @@ public class ClienteActivity extends AppCompatActivity {
 
         ObjectAnimator collapseAnimator =  ObjectAnimator.ofFloat(btn_menu.getMenuIconView(),
                 "rotation",
-                - 360f  +  ROTATION_ANGLE , 0f );
+                - 270f  +  ROTATION_ANGLE , 0f );
         ObjectAnimator expandAnimator = ObjectAnimator.ofFloat(btn_menu.getMenuIconView(),
                 "rotation",
-                0f , - 360f  +  ROTATION_ANGLE );
+                0f , - 270f  +  ROTATION_ANGLE );
         //menu fica 45 graus nao consegui arrumar
 
         final Drawable plusDrawable = ContextCompat.getDrawable(this,
@@ -284,7 +284,6 @@ public class ClienteActivity extends AppCompatActivity {
         //navigationView = findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(this);
         btn_menu=findViewById(R.id.menu_principal);
-        btn_menu.setMenuButtonColorNormalResId(R.color.colorPrimaryDark);
         final Drawable originalImage = btn_menu.getMenuIconView().getDrawable();
         btn_menu.setOnMenuButtonClickListener(new View.OnClickListener() {
             @Override
@@ -292,9 +291,10 @@ public class ClienteActivity extends AppCompatActivity {
 
                 if (btn_menu.isOpened()) {
                     // We will change the icon when the menu opens, here we want to change to the previous icon
+                    animation();
                     btn_menu.close(true);
                     btn_menu.getMenuIconView().setImageDrawable(originalImage);
-                    btn_menu.setIconAnimated(false);
+                    //btn_menu.setIconAnimated(false);
                   //  btn_menu.setAnimation();
                 } else {
                     // Since it is closed, let's set our new icon and then open the menu
