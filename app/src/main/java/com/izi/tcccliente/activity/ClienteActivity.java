@@ -4,12 +4,14 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.view.GravityCompat;
@@ -42,7 +44,7 @@ import java.util.List;
 public class ClienteActivity extends AppCompatActivity {
 
     private RecyclerView recycleRestaurante;
-
+    private AlertDialog alerta;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private DrawerLayout drawer;
@@ -99,7 +101,7 @@ public class ClienteActivity extends AppCompatActivity {
                                 ComercianteRecicleView comercianteSelecionado = restaurantes.get(position);
 
                                 String uidComerciante = comercianteSelecionado.getUid();
-                                loja.putExtra("idComerciante", uidComerciante);
+                                loja.putExtra("idComerciante", uidComerciante);// dado do comerciante
                                 startActivity(loja);
 
 
@@ -178,55 +180,100 @@ public class ClienteActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void fechartudo (View view)
     {
-        mAuth.getInstance().signOut();
-        finish();
-
+        Msg_alertas("Deseja sair do sistema ?",4);
     }
+
+    public void vaiscan(View view)
+    {
+        Msg_alertas("Desesja ver seus comprovantes ?",6);
+    }
+
     public void vaipedidos(View view)
     {
-        Intent pedidos = new Intent(ClienteActivity.this, AcompanharPedidoActivity.class);
-        startActivity(pedidos);
+        Msg_alertas("Desesja ver seus pedidos atuais ?",3);
     }
 
     public void vaicarrinho(View view)
     {
-        Intent carrinho = new Intent(ClienteActivity.this, CarrinhoActivity.class);
-        startActivity(carrinho);
+        Msg_alertas("Deseja verificar o carrinho?",5);
     }
 
+    private void Msg_alertas(String texto, int n) {
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    //@Override
-    /*
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("AVISO");
+        builder.setMessage(texto);
 
-        if (id == R.id.nav_home) {
-            // Handle the camera action
-        } else if (id == R.id.nav_carrinho) {
+        switch (n)
+        {
 
+            case 3://pedidos
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent pedidos = new Intent(ClienteActivity.this, AcompanharPedidoActivity.class);
+                        startActivity(pedidos);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-        } else if (id == R.id.nav_pedidos) {
+                    }
+                });
+                break;
+            case 4://sair
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mAuth.getInstance().signOut();
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
+                    }
+                });
+                break;
+            case 5://carrinho
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent carrinho = new Intent(ClienteActivity.this, CarrinhoActivity.class);
+                        startActivity(carrinho);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-        } else if (id == R.id.nav_tools) {
+                    }
+                });
+                break;
+            case 6://scan
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                  //      Intent qrcode = new Intent(ClienteActivity.this, qr_codeGeneratorActivity.class);
+                    //    startActivity(qrcode);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_sair) {
-
-
-
+                    }
+                });
+                break;
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
     }
-*/
 
     private void animation()
     {
@@ -276,6 +323,8 @@ public class ClienteActivity extends AppCompatActivity {
         adapterRestaurante = new AdapterEmpresa(restaurantes);
         recycleRestaurante.setAdapter(adapterRestaurante);
     }
+
+
     private void inicializarComponentes(){
         recycleRestaurante = findViewById(R.id.recicleRestaurante);
         mDatabase = ConfiguracaoFirebase.getFirebase();

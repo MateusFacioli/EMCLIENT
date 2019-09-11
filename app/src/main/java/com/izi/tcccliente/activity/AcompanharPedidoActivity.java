@@ -52,9 +52,14 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
         floatFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inicio = new Intent(AcompanharPedidoActivity.this, ClienteActivity.class);
-                startActivity(inicio);
-                finish();
+
+                    Intent qrcode = new Intent(AcompanharPedidoActivity.this, qr_codeGeneratorActivity.class);
+                    startActivity(qrcode);
+                      finish();
+
+
+
+
             }
         });
 

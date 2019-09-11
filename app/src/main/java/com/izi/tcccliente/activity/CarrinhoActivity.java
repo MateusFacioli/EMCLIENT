@@ -40,8 +40,8 @@ public class CarrinhoActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
-    private String idProduto;
-    private String idComerciante;
+    private String idProduto;// preciso
+    private String idComerciante;// preciso
 
     private Carrinho carrinho = new Carrinho();
     private List<LojaRecicleView> loja = new ArrayList<>();
@@ -178,12 +178,25 @@ public class CarrinhoActivity extends AppCompatActivity {
         if(bCarrinho != null){
             idComerciante = bCarrinho.get("idComerciante").toString();
             idProduto = bCarrinho.get("uidProduto").toString();
+
+            String retorno =getALL(idComerciante,idProduto);// PRECISO DOS DADOS
         }
 
         toolbar.setTitle("Carrinho");
         setSupportActionBar(toolbar);
 
 
+
+    }
+    public String getALL(String comerciante, String produto)
+    {
+        String texto="{ ";
+        texto+="Id_comerciante: "+comerciante.toString().trim()+" Id_produto: "+produto.toString().trim()+" }";
+        return  texto;
+        // preciso id_Comerciante
+        //produto_id
+        //valor
+        //quantidade
 
     }
     private void inicializarComponentes(){
