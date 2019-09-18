@@ -89,7 +89,9 @@
             android:onClick="vaiscan"
             android:src="@drawable/qrcodescan"
             android:visibility="visible"
-            app:fab_label="Seus comprovantes"></com.github.clans.fab.FloatingActionButton>
+            app:fab_label="Seus comprovantes">
+
+        </com.github.clans.fab.FloatingActionButton>
 
 
         <com.github.clans.fab.FloatingActionButton

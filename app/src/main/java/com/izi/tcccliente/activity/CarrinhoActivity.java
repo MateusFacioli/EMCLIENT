@@ -146,28 +146,9 @@ public class CarrinhoActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_carrinho, menu);
 
 
-        return super.onCreateOptionsMenu(menu);
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-            case R.id.menuContinuarComprando:
-                Intent loja = new Intent(CarrinhoActivity.this, LojaActivity.class);
-                loja.putExtra("idComerciante",idComerciante);
-                startActivity(loja);
-                finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private void configuraComponentes(){
         recicleCarrinho.setLayoutManager(new LinearLayoutManager(this));
@@ -190,7 +171,8 @@ public class CarrinhoActivity extends AppCompatActivity {
     }
     public String getALL(String comerciante, String produto)
     {
-        String texto="{ ";
+
+           String texto="{ ";
         texto+="Id_comerciante: "+comerciante.toString().trim()+" Id_produto: "+produto.toString().trim()+" }";
         return  texto;
         // preciso id_Comerciante

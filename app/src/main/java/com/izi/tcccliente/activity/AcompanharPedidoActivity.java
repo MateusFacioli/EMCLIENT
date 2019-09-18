@@ -1,10 +1,12 @@
 package com.izi.tcccliente.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +37,7 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private List<LojaRecicleView> produtos = new ArrayList<>();
     private List<Carrinho> carrinhos = new ArrayList<>();
+    private AlertDialog alerta;
 
     private FloatingActionButton floatFinalizar;
 
@@ -53,19 +56,61 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    Intent qrcode = new Intent(AcompanharPedidoActivity.this, qr_codeGeneratorActivity.class);
-                    startActivity(qrcode);
-                      finish();
-
-
-
-
-            }
+                Msg_alertas("Deseja finalizar as compras?",1);
+     }
         });
 
 
     }
 
+    private void Msg_alertas(String texto, int n) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("AVISO");
+        builder.setMessage(texto);
+
+        switch (n)
+        {
+
+            case 1://pedidos
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent qrcode = new Intent(AcompanharPedidoActivity.this, qr_codeGeneratorActivity.class);
+                        startActivity(qrcode);
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+                break;
+            case 2://excluir
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Carrinho produtoSelecionado= carrinhos.get(adapterPedidos.getItemViewType());
+                        //Cardapio produtoSelecionado = produtos.get(getAdapterPosition());
+                        //produtoSelecionado.remover();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+
+                    }
+                });
+                break;
+
+
+        }
+
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
     private void recuperarProdutos(){
         Query produtosRef = mDatabase
                 .child("pedido")
@@ -93,6 +138,7 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
         });
     }
 
+
     private void configuraComponentes(){
         recicleCarrinho.setLayoutManager(new LinearLayoutManager(this));
         recicleCarrinho.setHasFixedSize(true);
@@ -114,6 +160,7 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
         floatFinalizar = findViewById(R.id.floatingFinalizar);
 
         toolbar = findViewById(R.id.tb_acompanha);
+
 
     }
 

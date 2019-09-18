@@ -294,13 +294,14 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if(bLoja != null){
             idComerciante = bLoja.get("idComerciante").toString();
+           // toolbar.setTitle("Dados de "+idComerciante);
         }
     }
     private void inicializarComponentes(){
         recycleLoja = findViewById(R.id.recyclerLoja);
         mDatabase = ConfiguracaoFirebase.getFirebase();
         //toolbar = findViewById(R.id.toolbar_dados);
-        //toolbar.setTitle("Dados de "+idComerciante);
+
 
         iLoja = getIntent();
         bLoja = iLoja.getExtras();
