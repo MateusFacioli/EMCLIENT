@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     //layout
     private TextInputEditText inputLoginUsuario;
     private TextInputEditText inputLoginSenha;
+    private TextInputEditText inputConfirmaSenha;
     private Button btnLogar;
     private Button btnesqueci_Senha;
 
@@ -47,7 +48,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    logarComFirebase(inputLoginUsuario.getText().toString(), inputLoginSenha.getText().toString());
+                logarComFirebase(inputLoginUsuario.getText().toString(), inputLoginSenha.getText().toString());
+
+            }
+        });
+        btnesqueci_Senha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reset = new Intent(LoginActivity.this, ResetActivity.class);
+                startActivity(reset);
 
             }
         });
@@ -106,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
     private void inicializarComponentes(){
         inputLoginUsuario = findViewById(R.id.inputLoginUsuario);
         inputLoginSenha = findViewById(R.id.inputLoginSenha);
+        inputConfirmaSenha=findViewById(R.id.confirmar_Senha);
         btnLogar = findViewById(R.id.btnLogar);
         btnesqueci_Senha=findViewById(R.id.btnEsquecer_Senha);
 
