@@ -1,14 +1,9 @@
 package com.izi.tcccliente.adapter;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.izi.tcccliente.R;
-import com.izi.tcccliente.activity.AcompanharPedidoActivity;
-import com.izi.tcccliente.activity.qr_codeGeneratorActivity;
 import com.izi.tcccliente.model.Carrinho;
-import com.izi.tcccliente.model.LojaRecicleView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

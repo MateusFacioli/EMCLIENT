@@ -20,11 +20,9 @@ import com.izi.tcccliente.model.Cliente;
 
 
 
-/**
- * Created by jamiltondamasceno
- */
-
 public class UsuarioFirebase {
+
+    private static Cliente cliente;
 
     public static FirebaseUser getUsuarioAtual(){
         FirebaseAuth usuario = ConfiguracaoFirebase.getFirebaseInstance();
@@ -82,7 +80,7 @@ public class UsuarioFirebase {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Log.d("resultado", "onDataChange: " + dataSnapshot.toString() );
-                    Cliente cliente = dataSnapshot.getValue( Cliente.class );
+                    cliente = dataSnapshot.getValue( Cliente.class );
 
 
                         Intent i = new Intent(activity, ClienteActivity.class);

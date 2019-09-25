@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     //layout
     private TextInputEditText inputLoginUsuario;
     private TextInputEditText inputLoginSenha;
-    private TextInputEditText inputConfirmaSenha;
     private Button btnLogar;
     private Button btnesqueci_Senha;
 
@@ -47,14 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String senha = inputLoginSenha.getText().toString();
-                String consenha = inputConfirmaSenha.getText().toString();
-                if(senha.equals(consenha)) {
+
                     logarComFirebase(inputLoginUsuario.getText().toString(), inputLoginSenha.getText().toString());
-                }
-                else{
-                    Toast.makeText(LoginActivity.this, "Senhas não coincidem", Toast.LENGTH_LONG).show();
-                }
+
             }
         });
 
@@ -112,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
     private void inicializarComponentes(){
         inputLoginUsuario = findViewById(R.id.inputLoginUsuario);
         inputLoginSenha = findViewById(R.id.inputLoginSenha);
-        inputConfirmaSenha=findViewById(R.id.confirmar_Senha);
         btnLogar = findViewById(R.id.btnLogar);
         btnesqueci_Senha=findViewById(R.id.btnEsquecer_Senha);
 

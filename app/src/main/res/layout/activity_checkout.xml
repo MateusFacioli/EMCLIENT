@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) Google
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    tools:context="com.izi.tcccliente.service.CheckoutActivity">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        tools:ignore="MissingConstraints">
+
+        <include
+            android:id="@+id/googlepay"
+            layout="@layout/googlepay_button"
+            android:layout_width="@dimen/buy_button_width"
+            android:layout_height="@dimen/buy_button_height"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="67dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.142"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:layout_constraintVertical_bias="0.566"
+        app:srcCompat="@drawable/pinmaps" />
+
+    <TextView
+        android:id="@+id/bordaloja"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_edit_text"
+        app:layout_constraintBottom_toTopOf="@+id/bordaendereco"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tolbarcheck2" />
+
+    <TextView
+        android:id="@+id/bordaendereco"
+        android:layout_width="331dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="@dimen/buy_button_height"
+        android:background="@drawable/bg_edit_text"
+        app:layout_constraintBottom_toTopOf="@+id/autocomplete_fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bordaloja"
+        tools:ignore="UnknownId" />
+
+    <TextView
+        android:id="@+id/bordapedido"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bg_edit_text"
+        app:layout_constraintBottom_toTopOf="@+id/googlestatus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment" />
+
+    <TextView
+        android:id="@+id/textView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="Loja"
+        android:textColor="#FD0F0F0F"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bordaloja"
+        app:layout_constraintEnd_toEndOf="@+id/bordaloja"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="@+id/bordaloja"
+        app:layout_constraintTop_toTopOf="@+id/bordaloja"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Endereço de Entrega"
+        android:textColor="#141414"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bordaendereco"
+        app:layout_constraintEnd_toEndOf="@+id/bordaendereco"
+        app:layout_constraintStart_toStartOf="@+id/bordaendereco"
+        app:layout_constraintTop_toTopOf="@+id/bordaendereco"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pedido"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bordapedido"
+        app:layout_constraintEnd_toEndOf="@+id/bordapedido"
+        app:layout_constraintStart_toStartOf="@+id/bordapedido"
+        app:layout_constraintTop_toTopOf="@+id/bordapedido" />
+
+    <TextView
+        android:id="@+id/googlestatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:text="@string/googlepay_status_checking"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bordapedido"
+        tools:ignore="MissingConstraints" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tolbarcheck2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/bordaloja"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:ignore="MissingConstraints" />
+
+    <fragment
+        android:id="@+id/autocomplete_fragment"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        android:layout_width="229dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/bordapedido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.675"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bordaendereco" />
+
+
+</android.support.constraint.ConstraintLayout>

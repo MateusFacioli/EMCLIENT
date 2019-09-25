@@ -32,7 +32,9 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|screenSize">
         </activity>
-<activity android:name=".activity.qr_codeGeneratorActivity" >
+<activity android:name=".activity.Qr_codeGeneratorActivity" >
+
+
 
 </activity>
         <!--
@@ -47,12 +49,20 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
         <activity android:name=".activity.CarrinhoActivity" />
         <activity android:name=".activity.LojaActivity" />
+
         <activity
             android:name=".activity.ClienteActivity"
             android:label="@string/title_activity_cliente"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".service.CheckoutActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.facebook.accountkit.ApplicationName"

@@ -26,6 +26,7 @@ import com.izi.tcccliente.helper.UsuarioFirebase;
 import com.izi.tcccliente.listener.RecyclerItemClickListener;
 import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.LojaRecicleView;
+import com.izi.tcccliente.service.CheckoutActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +102,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
                     }
 
-                    Intent inicio = new Intent(CarrinhoActivity.this, AcompanharPedidoActivity.class);
+                    Intent inicio = new Intent(CarrinhoActivity.this, CheckoutActivity.class);
                     startActivity(inicio);
                     finish();
                     Class<LojaActivity> loja = LojaActivity.class;

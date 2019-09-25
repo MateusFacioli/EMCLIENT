@@ -235,7 +235,7 @@ public class ClienteActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                  //      Intent qrcode = new Intent(ClienteActivity.this, qr_codeGeneratorActivity.class);
+                  //      Intent qrcode = new Intent(ClienteActivity.this, Qr_codeGeneratorActivity.class);
                     //    startActivity(qrcode);
                     }
                 });

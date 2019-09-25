@@ -18,7 +18,7 @@ import com.izi.tcccliente.R;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 
-public class qr_codeGeneratorActivity extends AppCompatActivity {
+public class Qr_codeGeneratorActivity extends AppCompatActivity {
 
     private Button scan;
     private ImageView qr_code;
@@ -62,7 +62,7 @@ public class qr_codeGeneratorActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Intent inicio = new Intent(qr_codeGeneratorActivity.this, ClienteActivity.class);
+                Intent inicio = new Intent(Qr_codeGeneratorActivity.this, ClienteActivity.class);
                 startActivity(inicio);
                 finish();
                 /*

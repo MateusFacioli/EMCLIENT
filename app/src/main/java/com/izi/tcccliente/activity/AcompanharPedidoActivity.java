@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.izi.tcccliente.R;
-import com.izi.tcccliente.adapter.AdapterCarrinho;
 import com.izi.tcccliente.adapter.AdapterPedidos;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
@@ -76,7 +74,7 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent qrcode = new Intent(AcompanharPedidoActivity.this, qr_codeGeneratorActivity.class);
+                        Intent qrcode = new Intent(AcompanharPedidoActivity.this, Qr_codeGeneratorActivity.class);
                         startActivity(qrcode);
                         finish();
                     }
