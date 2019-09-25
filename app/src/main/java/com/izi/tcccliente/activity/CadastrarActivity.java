@@ -35,8 +35,7 @@ public class CadastrarActivity extends AppCompatActivity {
     private TextView txtTelefone;
     private TextInputEditText inputSenha;
     private FloatingActionButton btnFloatNext;
-    private Cliente cliente =   new Cliente();
-    private TextInputEditText confirmar_Senha;
+    private Cliente cliente = new Cliente();
 
     //Firebase
     private FirebaseAuth mAuth;
@@ -52,14 +51,7 @@ public class CadastrarActivity extends AppCompatActivity {
         btnFloatNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String senha = inputSenha.getText().toString();
-                String consenha = confirmar_Senha.getText().toString();
-                if(senha.equals(consenha)) {
-                    salvarCliente();
-                }
-                else{
-                    Toast.makeText(CadastrarActivity.this, "Senhas não coincidem", Toast.LENGTH_LONG).show();
-                }
+                salvarCliente();
 
 
             }
@@ -191,6 +183,5 @@ public class CadastrarActivity extends AppCompatActivity {
         inputSenha = findViewById(R.id.inputSenha);
         mAuth = FirebaseAuth.getInstance();
         btnFloatNext = findViewById(R.id.floatingNext);
-        confirmar_Senha = findViewById(R.id.confirmar_Senha);
     }
 }
