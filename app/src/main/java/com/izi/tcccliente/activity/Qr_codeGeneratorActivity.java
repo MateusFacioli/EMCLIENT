@@ -62,7 +62,7 @@ public class Qr_codeGeneratorActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                Intent inicio = new Intent(Qr_codeGeneratorActivity.this, ClienteActivity.class);
+                Intent inicio = new Intent(Qr_codeGeneratorActivity.this, Activity_Recebido.class);
                 startActivity(inicio);
                 finish();
                 /*

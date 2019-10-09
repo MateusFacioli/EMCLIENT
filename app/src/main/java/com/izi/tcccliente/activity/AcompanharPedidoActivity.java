@@ -54,7 +54,10 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Msg_alertas("Deseja finalizar as compras?",1);
+                //Msg_alertas("Deseja finalizar as compras?",1);
+                Intent qrcode = new Intent(AcompanharPedidoActivity.this, ConfirmarPedidos.class);
+                startActivity(qrcode);
+
      }
         });
 
@@ -74,7 +77,7 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent qrcode = new Intent(AcompanharPedidoActivity.this, Qr_codeGeneratorActivity.class);
+                        Intent qrcode = new Intent(AcompanharPedidoActivity.this, ConfirmarPedidos.class);
                         startActivity(qrcode);
                         finish();
                     }
@@ -110,9 +113,10 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
         alerta.show();
     }
     private void recuperarProdutos(){
-        Query produtosRef = mDatabase
-                .child("pedido")
-                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
+        DatabaseReference produtosRef = mDatabase
+                .child("cliente")
+                .child(UsuarioFirebase.getIdentificadorUsuario())
+                .child("pedidos");
 
 
         produtosRef.addValueEventListener(new ValueEventListener() {
@@ -124,7 +128,6 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
                     carrinhos.add(ds.getValue(Carrinho.class));
 
                 }
-
 
                 adapterPedidos.notifyDataSetChanged();
             }

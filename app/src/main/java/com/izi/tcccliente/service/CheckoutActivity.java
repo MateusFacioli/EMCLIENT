@@ -73,6 +73,17 @@ public class CheckoutActivity extends AppCompatActivity {
   private long mShippingCost = 90 * 1000000;
   private PlacesClient placesClient;
   private final int AUTOCOMPLETE_REQUEST_CODE = 99;
+  private Intent iConfirma;
+  private Bundle bConfirma;
+
+  private TextView txtEnderecoFinalizar;
+  private TextView txtNomeLoja;
+  private TextView txtNomePedido;
+
+  private String nomePedido;
+  private String nomeLoja;
+  private String idLoja;
+  private String endereco;
 
   @RequiresApi(api = Build.VERSION_CODES.N)
   @Override
@@ -80,11 +91,11 @@ public class CheckoutActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_checkout);
     inicializarComponenetes();
-    //configurarComponenetes();
+    configurarComponentes();
     toolbar = findViewById(R.id.tolbarcheck2);
     toolbar.setTitle("Confirmar Pedido");
     setSupportActionBar(toolbar);
-    autoComplete();
+
 
     // Set up the mock information for our item in the UI.
     //initItemUI();
@@ -190,40 +201,7 @@ public class CheckoutActivity extends AppCompatActivity {
   }
 
 
-  private void autoComplete() {
-    AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-            getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
-    autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS));
-
-    autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-      @Override
-      public void onPlaceSelected(Place place) {
-        /*// TODO: Get info about the selected place.
-        Log.i("PlaceCerto", "Place: " + place.getName() + ", " + place.getId());
-        Geocoder geocoder = new Geocoder(CheckoutActivity.this, Locale.getDefault());
-        try {
-          List<Address> listaEnderecos = geocoder.getFromLocationName(place.getName(), 1);
-          if(listaEnderecos != null && listaEnderecos.size() >0){
-            Address address = listaEnderecos.get(0);
-            salvaLocal(address);
-          }
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-               */
-
-        
-
-      }
-
-      @Override
-      public void onError(Status status) {
-        // TODO: Handle the error.
-        Log.i("PlaceErrado", "An error occurred: " + status);
-      }
-    });
-  }
 
   private void handlePaymentSuccess(PaymentData paymentData) {
     String paymentInformation = paymentData.toJson();
@@ -314,24 +292,34 @@ public class CheckoutActivity extends AppCompatActivity {
   //}
 
   private void inicializarComponenetes(){
-    if (!Places.isInitialized()) {
-      Places.initialize(getApplicationContext(), "AIzaSyCVA5Z6ZpycRP-NPtyKjvBbUSKXJ6aiD70");
+
+
+    iConfirma = getIntent();
+    bConfirma = iConfirma.getExtras();
+
+    txtNomeLoja = findViewById(R.id.txtNomeLoja);
+    txtNomePedido = findViewById(R.id.txtNomePedido);
+    txtNomeLoja = findViewById(R.id.txtNomeLoja);
+    txtEnderecoFinalizar = findViewById(R.id.txtEnderecoFinalizar);
+  }
+  public void configurarComponentes(){
+
+    if(bConfirma != null){
+      nomePedido = bConfirma.get("nomePedido").toString();
+      nomeLoja = bConfirma.get("nomeLoja").toString();
+      idLoja = bConfirma.get("idLoja").toString();
+      endereco = bConfirma.get("endereco").toString();
+      txtEnderecoFinalizar.setText(endereco);
+      txtNomeLoja.setText(nomeLoja);
+      txtNomePedido.setText(nomePedido);
+
     }
 
-    placesClient = Places.createClient(this);
+    toolbar = findViewById(R.id.tolbarcheck2);
+    toolbar.setTitle("Confirmar Pedido");
+    setSupportActionBar(toolbar);
 
-    autocompleteFragment = (AutocompleteSupportFragment)
-            getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-  }
-  private void configurarComponenetes(){
-    // Set the fields to specify which types of place data to return.
-    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
-    // Start the autocomplete intent.
-    Intent intent = new Autocomplete.IntentBuilder(
-            AutocompleteActivityMode.FULLSCREEN, fields)
-            .build(this);
-    startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
   }
 
 

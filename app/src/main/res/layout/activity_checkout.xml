@@ -21,7 +21,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
-    tools:context="com.izi.tcccliente.service.CheckoutActivity">
+    tools:context=".service.CheckoutActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -47,61 +47,45 @@
 
     </FrameLayout>
 
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="67dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView22"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.142"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20"
-        app:layout_constraintVertical_bias="0.566"
-        app:srcCompat="@drawable/pinmaps" />
-
     <TextView
         android:id="@+id/bordaloja"
-        android:layout_width="330dp"
+        android:layout_width="379dp"
         android:layout_height="30dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/bg_edit_text"
-        app:layout_constraintBottom_toTopOf="@+id/bordaendereco"
+        app:layout_constraintBottom_toTopOf="@+id/txtNomeLoja"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tolbarcheck2" />
 
     <TextView
+        android:id="@+id/bordapedido"
+        android:layout_width="379dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnderecoFinalizar" />
+
+    <TextView
         android:id="@+id/bordaendereco"
-        android:layout_width="331dp"
+        android:layout_width="379dp"
         android:layout_height="34dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="@dimen/buy_button_height"
-        android:background="@drawable/bg_edit_text"
-        app:layout_constraintBottom_toTopOf="@+id/autocomplete_fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bordaloja"
-        tools:ignore="UnknownId" />
-
-    <TextView
-        android:id="@+id/bordapedido"
-        android:layout_width="330dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="41dp"
         android:layout_marginBottom="32dp"
         android:background="@drawable/bg_edit_text"
-        app:layout_constraintBottom_toTopOf="@+id/googlestatus"
+        app:layout_constraintBottom_toTopOf="@+id/txtEnderecoFinalizar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autocomplete_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNomeLoja"
+        tools:ignore="UnknownId" />
 
     <TextView
         android:id="@+id/textView21"
@@ -129,6 +113,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/bordaendereco"
         app:layout_constraintEnd_toEndOf="@+id/bordaendereco"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/bordaendereco"
         app:layout_constraintTop_toTopOf="@+id/bordaendereco"
         app:layout_constraintVertical_bias="0.0" />
@@ -147,20 +132,49 @@
 
     <TextView
         android:id="@+id/googlestatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="379dp"
+        android:layout_height="19dp"
         android:layout_gravity="center"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="96dp"
         android:gravity="center"
         android:text="@string/googlepay_status_checking"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bordapedido"
         tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txtNomeLoja"
+        android:layout_width="127dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/bordaendereco"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bordaloja" />
+
+    <TextView
+        android:id="@+id/txtEnderecoFinalizar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="           TextView"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bordapedido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bordaendereco" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tolbarcheck2"
@@ -171,23 +185,60 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toTopOf="@+id/bordaloja"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintVertical_chainStyle="packed"
         tools:ignore="MissingConstraints" />
 
-    <fragment
-        android:id="@+id/autocomplete_fragment"
-        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-        android:layout_width="229dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/bordapedido"
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="266dp"
+        android:layout_height="56dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.675"
+        app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bordaendereco" />
+        app:layout_constraintTop_toBottomOf="@+id/bordapedido"
+        app:layout_constraintVertical_bias="0.05">
+
+        <TextView
+            android:id="@+id/txtNomePedido"
+            android:layout_width="123dp"
+            android:layout_height="49dp"
+            android:gravity="center"
+            android:text="produto"
+            android:textSize="20sp"
+            tools:ignore="MissingConstraints" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 10,00"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bordapedido"
+        app:layout_constraintVertical_bias="0.087" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="59dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtEnderecoFinalizar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bordaendereco"
+        app:srcCompat="@drawable/icon" />
 
 
 </android.support.constraint.ConstraintLayout>

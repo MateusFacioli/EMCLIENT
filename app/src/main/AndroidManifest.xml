@@ -53,8 +53,11 @@
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
 
+        <activity android:name=".activity.Activity_Recebido"></activity>
+        <activity android:name=".activity.Locais"/>
         <activity android:name=".activity.CarrinhoActivity" />
         <activity android:name=".activity.LojaActivity" />
+        <activity android:name=".activity.ConfirmarPedidos" />
 
         <activity
             android:name=".activity.ClienteActivity"

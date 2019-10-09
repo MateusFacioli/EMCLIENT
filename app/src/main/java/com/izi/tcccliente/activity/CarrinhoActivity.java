@@ -102,7 +102,10 @@ public class CarrinhoActivity extends AppCompatActivity {
 
                     }
 
-                    Intent inicio = new Intent(CarrinhoActivity.this, CheckoutActivity.class);
+                    Intent inicio = new Intent(CarrinhoActivity.this, Locais.class);
+                    inicio.putExtra("nomePedido", carrinho.getProduto().getNome());
+                    inicio.putExtra("nomeLoja", carrinho.getComerciante().getNome());
+                    inicio.putExtra("idLoja", carrinho.getComerciante().getUid());
                     startActivity(inicio);
                     finish();
                     Class<LojaActivity> loja = LojaActivity.class;
