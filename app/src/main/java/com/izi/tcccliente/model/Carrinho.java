@@ -28,12 +28,30 @@ public class Carrinho {
     }
 
     public void salvarPedido(){
+        DatabaseReference database3 = ConfiguracaoFirebase.getFirebaseDatabase();
+        DatabaseReference reference3 = database3
+                .child("pedidos")
+                .child(getProduto().getIdProduto());
+
+        reference3.setValue(this);
+
         DatabaseReference database = ConfiguracaoFirebase.getFirebaseDatabase();
-        DatabaseReference reference = database.child("pedido")
+        DatabaseReference reference = database
+                .child("cliente")
                 .child(UsuarioFirebase.getDadosUsuarioLogado().getUid())
+                .child("pedidos")
                 .child(getProduto().getIdProduto());
 
         reference.setValue(this);
+
+        DatabaseReference database1 = ConfiguracaoFirebase.getFirebaseDatabase();
+        DatabaseReference reference1 = database1
+                .child("comerciante")
+                .child(comerciante.getUid())
+                .child("pedidos")
+                .child(getProduto().getIdProduto());
+
+        reference1.setValue(this);
 
     }
 

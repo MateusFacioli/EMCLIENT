@@ -161,7 +161,7 @@ public class CarrinhoActivity extends AppCompatActivity {
             idComerciante = bCarrinho.get("idComerciante").toString();
             idProduto = bCarrinho.get("uidProduto").toString();
 
-            String retorno =getALL(idComerciante,idProduto);// PRECISO DOS DADOS
+            String retorno = getALL(idComerciante,idProduto);// PRECISO DOS DADOS
         }
 
         toolbar.setTitle("Carrinho");
