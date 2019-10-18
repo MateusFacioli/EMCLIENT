@@ -161,10 +161,11 @@ public class CarrinhoActivity extends AppCompatActivity {
         recicleCarrinho.setAdapter(adapterCarrinho);
 
         if(bCarrinho != null){
-            idComerciante = bCarrinho.get("idComerciante").toString();
-            idProduto = bCarrinho.get("uidProduto").toString();
 
-            String retorno = getALL(idComerciante,idProduto);// PRECISO DOS DADOS
+            //idComerciante = bCarrinho.get("idComerciante").toString();
+            //idProduto = bCarrinho.get("uidProduto").toString();
+
+            //String retorno = getALL(idComerciante,idProduto);// PRECISO DOS DADOS
         }
 
         toolbar.setTitle("Carrinho");
@@ -173,11 +174,16 @@ public class CarrinhoActivity extends AppCompatActivity {
 
 
     }
-    public String getALL(String comerciante, String produto)
+    public String getALL()
     {
+//             String comerciante =carrinho.getComerciante().getUid().toString();
+  //           String produto =carrinho.getProduto().getIdProduto().toString();
+    //        String preco =carrinho.getProduto().getPreco().toString();
+//        String cliente =carrinho.getCliente().getNome().toString();
 
            String texto="{ ";
-        texto+="Id_comerciante: "+comerciante.toString().trim()+" Id_produto: "+produto.toString().trim()+" }";
+        texto+="Id_comerciante: Id_produto:  preço:  cliente:  }";
+        //texto+="Id_comerciante: "+comerciante+" Id_produto: "+produto+"preço: "+preco+"cliente: "+cliente+" }";
         return  texto;
         // preciso id_Comerciante
         //produto_id

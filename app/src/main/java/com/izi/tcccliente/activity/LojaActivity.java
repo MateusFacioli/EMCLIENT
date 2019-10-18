@@ -26,14 +26,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.izi.tcccliente.R;
-import com.izi.tcccliente.adapter.AdapterEmpresa;
 import com.izi.tcccliente.adapter.AdapterLoja;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
@@ -296,15 +294,16 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if(bLoja != null){
             idComerciante = bLoja.get("idComerciante").toString();
-           // toolbar.setTitle("Dados de "+idComerciante);
+
         }
+
     }
     private void inicializarComponentes(){
         recycleLoja = findViewById(R.id.recyclerLoja);
         mDatabase = ConfiguracaoFirebase.getFirebase();
-        //toolbar = findViewById(R.id.toolbar_dados);
+        //toolbar = findViewById(R.id.tb_dado_com);
 
-
+        // o que é isso?
         iLoja = getIntent();
         bLoja = iLoja.getExtras();
     }

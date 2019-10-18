@@ -46,6 +46,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.MyViewHo
           String urlImagem = carrinhoR.getProduto().getImgUrl();
           Picasso.get().load( urlImagem ).into( holder.imagemEmpresa );
 
+
     }
 
 
@@ -71,6 +72,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.MyViewHo
             valor = itemView.findViewById(R.id.txtPrecoPedido);
             delete_item=itemView.findViewById(R.id.del_item);
 
+
            delete_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -80,10 +82,9 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.MyViewHo
                     snackbar.setAction("OK", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Carrinho produtoSelecionado = carrinho.get(getAdapterPosition());
-                            //produtoSelecionado.removerCarrinho();
-                            // carrinho.remove(getAdapterPosition());
-                            //nao esta excluindo
+                            Carrinho produtoSelecionado =carrinho.get(getAdapterPosition());
+                           produtoSelecionado.removerCarrinho();
+                           //nao esta removendo
 
                         }
                     });
