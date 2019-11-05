@@ -78,6 +78,7 @@
             android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
 
         <activity android:name=".activity.CadastrarActivity" />
+        <activity android:name=".activity.ResetActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>

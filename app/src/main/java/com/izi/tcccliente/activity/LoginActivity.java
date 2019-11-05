@@ -52,6 +52,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        btnesqueci_Senha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reset = new Intent(LoginActivity.this, ResetActivity.class);
+                startActivity(reset);
+            }
+        });
+
     }
 
     private void logarComFirebase(String email, String senha){

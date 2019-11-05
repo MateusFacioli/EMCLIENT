@@ -63,7 +63,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         recuperarProdutos();
 
 
-        recicleCarrinho.addOnItemTouchListener(
+        /*recicleCarrinho.addOnItemTouchListener(
                 new RecyclerItemClickListener(
                         this,
                         recicleCarrinho,
@@ -88,6 +88,8 @@ public class CarrinhoActivity extends AppCompatActivity {
                 )
         );
 
+         */
+
 
         floatPedido.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,8 +109,8 @@ public class CarrinhoActivity extends AppCompatActivity {
                     inicio.putExtra("nomeLoja", carrinho.getComerciante().getNome());
                     inicio.putExtra("idLoja", carrinho.getComerciante().getUid());
                     startActivity(inicio);
-                    finish();
-                    Class<LojaActivity> loja = LojaActivity.class;
+                   // finish();
+                  //  Class<LojaActivity> loja = LojaActivity.class;
 
                 }
 
@@ -136,8 +138,6 @@ public class CarrinhoActivity extends AppCompatActivity {
                     carrinhos.add(ds.getValue(Carrinho.class));
 
                 }
-
-
 
 
                 adapterCarrinho.notifyDataSetChanged();

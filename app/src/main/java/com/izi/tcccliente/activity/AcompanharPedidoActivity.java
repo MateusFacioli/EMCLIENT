@@ -92,7 +92,8 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Carrinho produtoSelecionado= carrinhos.get(adapterPedidos.getItemViewType());
+
+                        //Carrinho produtoSelecionado= carrinhos.get();
                         //Cardapio produtoSelecionado = produtos.get(getAdapterPosition());
                         //produtoSelecionado.remover();
                     }
