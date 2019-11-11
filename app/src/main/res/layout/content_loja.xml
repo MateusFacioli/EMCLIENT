@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_dados"
+        android:id="@+id/tb_dado_com"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:title="Dados  do comerciante " />
+        app:title="Refeições disponíveis" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerLoja"
@@ -31,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar_dados"
+        app:layout_constraintTop_toTopOf="@+id/tb_dado_com"
         app:layout_constraintVertical_bias="0.0" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"

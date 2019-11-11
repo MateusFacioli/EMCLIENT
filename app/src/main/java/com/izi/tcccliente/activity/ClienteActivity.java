@@ -199,7 +199,8 @@ public class ClienteActivity extends AppCompatActivity {
               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                   restaurantes.clear();
                   for (DataSnapshot ds: dataSnapshot.getChildren()){
-                      if(ds.getValue(ComercianteRecicleView.class).getLocalizacao() != null) {
+                      if(ds.getValue(ComercianteRecicleView.class).getLocalizacao() != null &&
+                              ds.getValue(ComercianteRecicleView.class).getNome() != null) {
                           restaurantes.add(ds.getValue(ComercianteRecicleView.class));
                       }
                   }
@@ -302,8 +303,8 @@ public class ClienteActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                  //      Intent qrcode = new Intent(ClienteActivity.this, Qr_codeGeneratorActivity.class);
-                    //    startActivity(qrcode);
+                        Intent qrcode = new Intent(ClienteActivity.this, Qr_codeGeneratorActivity.class);
+                        startActivity(qrcode);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

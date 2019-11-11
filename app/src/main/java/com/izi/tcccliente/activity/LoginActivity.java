@@ -52,6 +52,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
+        btnesqueci_Senha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reset = new Intent(LoginActivity.this, ResetActivity.class);
+                startActivity(reset);
+            }
+        });
+
     }
 
     private void logarComFirebase(String email, String senha){
@@ -95,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TagLoginErrado", "Email ou Senha invalidos!", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.makeText(LoginActivity.this, "Erro! E-mail ou senha inválidos",
                                     Toast.LENGTH_SHORT).show();
 
                         }
