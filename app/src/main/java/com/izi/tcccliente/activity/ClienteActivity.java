@@ -6,6 +6,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,11 +27,21 @@ import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.firebase.geofire.GeoFire;
+import com.firebase.geofire.GeoLocation;
+import com.firebase.geofire.GeoQuery;
+import com.firebase.geofire.GeoQueryEventListener;
 import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.izi.tcccliente.R;
 import com.izi.tcccliente.adapter.AdapterEmpresa;
@@ -43,6 +54,7 @@ import java.util.List;
 
 public class ClienteActivity extends AppCompatActivity {
 
+    private GoogleMap mMap;
     private RecyclerView recycleRestaurante;
     private AlertDialog alerta;
     private FirebaseAuth mAuth;
@@ -50,6 +62,7 @@ public class ClienteActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private FloatingActionMenu btn_menu;
+    private LatLng localCliente;
 
     private AdapterEmpresa adapterRestaurante;
     private List<ComercianteRecicleView> restaurantes = new ArrayList<>();
@@ -66,7 +79,8 @@ public class ClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cliente);
         inicializarComponentes();
         configuraRecicleView();
-        recuperarRestaurantesFirebase();
+        //recuperarRestaurantesFirebase();
+        verificarDistancia();
 
         /**
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -124,10 +138,63 @@ public class ClienteActivity extends AppCompatActivity {
 
 
 
-    private void recuperarRestaurantesFirebase(){
+
+    private void verificarDistancia( ){
+
+        localCliente = new LatLng(
+                Double.parseDouble("-22.831938"),
+                Double.parseDouble("-47.050647")
+        );
+
+        //Inicializar GeoFire
+        DatabaseReference localUsuario = ConfiguracaoFirebase.getFirebaseDatabase()
+                .child("local_comerciante");
+        GeoFire geoFire = new GeoFire(localUsuario);
+
+
+        final GeoQuery geoQuery = geoFire.queryAtLocation(
+                new GeoLocation(localCliente.latitude, localCliente.longitude),
+                1//em km (0.05 50 metros)
+        );
+
+        geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
+            @Override
+            public void onKeyEntered(String key, GeoLocation location) {
+
+
+
+                recuperarRestaurantesFirebase(key);
+            }
+
+            @Override
+            public void onKeyExited(String key) {
+
+            }
+
+            @Override
+            public void onKeyMoved(String key, GeoLocation location) {
+
+            }
+
+            @Override
+            public void onGeoQueryReady() {
+
+            }
+
+            @Override
+            public void onGeoQueryError(DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+    private void recuperarRestaurantesFirebase(String id){
 
          DatabaseReference retaurantesRef = mDatabase.child("comerciante");
-          retaurantesRef.addValueEventListener(new ValueEventListener() {
+        Query restaurantesQ = retaurantesRef.orderByChild("uid").equalTo(id);
+          restaurantesQ.addValueEventListener(new ValueEventListener() {
               @Override
               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                   restaurantes.clear();

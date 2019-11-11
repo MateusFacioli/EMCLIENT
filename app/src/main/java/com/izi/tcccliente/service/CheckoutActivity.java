@@ -308,7 +308,7 @@ public class CheckoutActivity extends AppCompatActivity {
       nomePedido = bConfirma.get("nomePedido").toString();
       nomeLoja = bConfirma.get("nomeLoja").toString();
       idLoja = bConfirma.get("idLoja").toString();
-      endereco = bConfirma.get("endereco").toString();
+      //endereco = bConfirma.get("endereco").toString();
       txtEnderecoFinalizar.setText(endereco);
       txtNomeLoja.setText(nomeLoja);
       txtNomePedido.setText(nomePedido);

@@ -3,6 +3,9 @@ package com.izi.tcccliente.model;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
 
@@ -14,7 +17,12 @@ public class Pedidos {
     private String estado;
     private String idPedido;
 
+
+
+
     public Pedidos() {
+
+
 
         setEstado("Aguardando interação");
 
@@ -44,6 +52,9 @@ public class Pedidos {
 
 
     }
+
+
+
 
     public String getIdPedido() {
         return idPedido;

@@ -4,7 +4,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Carrinho {
@@ -14,7 +16,19 @@ public class Carrinho {
     private LojaRecicleView produto;
     private String idpedido;
     private String status;
+    private String dataX;
 
+
+    public Carrinho(){
+        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
+        DatabaseReference produtoRef = firebaseRef
+                .child("pedidos");
+        setIdpedido( produtoRef.push().getKey() );
+
+        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy");
+        Date data = new Date();
+        setDataX(formataData.format(data));
+    }
 
 
 
@@ -66,12 +80,13 @@ public class Carrinho {
     }
 
 
-    public Carrinho() {
 
-        DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebase();
-        DatabaseReference produtoRef = firebaseRef
-                .child("pedidos");
-        setIdpedido( produtoRef.push().getKey() );
+    public String getDataX() {
+        return dataX;
+    }
+
+    public void setDataX(String dataX) {
+        this.dataX = dataX;
     }
 
     public String getStatus() {

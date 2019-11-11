@@ -73,6 +73,8 @@ dependencies {
 
     implementation 'com.github.jd-alexander:library:1.1.0'
 
+    implementation 'com.firebase:geofire-java:3.0.0'
+
 
 }
 apply plugin: 'com.google.gms.google-services'
