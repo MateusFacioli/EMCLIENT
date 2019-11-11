@@ -8,21 +8,17 @@
     tools:context=".activity.CadastrarActivity">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout10"
+        android:id="@+id/information"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout11"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04000002"
-        app:layout_constraintVertical_chainStyle="packed">
+        app:layout_constraintTop_toTopOf="parent">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/inputNome"
@@ -33,19 +29,39 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtTelefone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/information">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/inputCPF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CPF"
+            android:inputType="number"
+            android:maxLength="11" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout11"
         android:layout_width="match_parent"
         android:layout_height="53dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout13"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout10">
+        app:layout_constraintTop_toBottomOf="@+id/txtTelefone">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/inputEmail"
@@ -58,14 +74,12 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout13"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtTelefone"
+        app:layout_constraintBottom_toTopOf="@+id/inputConfirmaSenha"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout11">
@@ -84,17 +98,16 @@
         android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="32dp"
         android:gravity="center_vertical"
+        android:inputType="phone"
         android:text="Telefone"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/floatingNext"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout13" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/floatingNext"
@@ -102,18 +115,47 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
         android:clickable="true"
-        app:backgroundTint="@android:color/white"
+        app:backgroundTint="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/right_arrow" />
+
+    <android.support.design.widget.TextInputEditText
+        android:id="@+id/inputConfirmaSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:hint=" Confirma senha"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/floatingNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout13" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+
+    </android.support.design.widget.TextInputLayout>
 
 </android.support.constraint.ConstraintLayout>
