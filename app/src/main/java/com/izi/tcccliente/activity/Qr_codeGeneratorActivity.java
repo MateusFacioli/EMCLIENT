@@ -33,8 +33,8 @@ public class Qr_codeGeneratorActivity extends AppCompatActivity {
         information=findViewById(R.id.texto_qrcode);
         CarrinhoActivity carrinhoActivity;
         carrinhoActivity= new CarrinhoActivity();
-        String json= carrinhoActivity.getALL();
-        information.setText(json);
+       // String json= carrinhoActivity.getALL();
+       // information.setText(json);
         String text= information.getText().toString().trim();
         if(text!=null){
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
