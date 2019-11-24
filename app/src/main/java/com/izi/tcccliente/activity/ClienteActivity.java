@@ -199,7 +199,7 @@ public class ClienteActivity extends AppCompatActivity {
               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                   restaurantes.clear();
                   for (DataSnapshot ds: dataSnapshot.getChildren()){
-                      if(ds.getValue(ComercianteRecicleView.class).getLocalizacao() != null &&
+                      if(/*ds.getValue(ComercianteRecicleView.class).getLocalizacao() != null && */
                               ds.getValue(ComercianteRecicleView.class).getNome() != null) {
                           restaurantes.add(ds.getValue(ComercianteRecicleView.class));
                       }
