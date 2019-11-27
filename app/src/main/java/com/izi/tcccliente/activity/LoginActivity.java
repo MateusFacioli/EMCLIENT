@@ -47,7 +47,23 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                    logarComFirebase(inputLoginUsuario.getText().toString(), inputLoginSenha.getText().toString());
+
+                try{
+                    if(inputLoginUsuario.getText().toString()!=""|| inputLoginSenha.getText().toString()!="")
+                    {
+                        logarComFirebase(inputLoginUsuario.getText().toString(), inputLoginSenha.getText().toString());
+                    }
+                    else
+                    {
+                        Toast.makeText(LoginActivity.this, "Favor preencher  todos os dados de login", Toast.LENGTH_LONG).show();
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(LoginActivity.this, "Favor preencher os dados de login", Toast.LENGTH_LONG).show();
+                }
+
 
             }
         });
