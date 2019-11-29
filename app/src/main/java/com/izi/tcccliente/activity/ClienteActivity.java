@@ -117,10 +117,7 @@ public class ClienteActivity extends AppCompatActivity {
                                 String uidComerciante = comercianteSelecionado.getUid();
                                 loja.putExtra("idComerciante", uidComerciante);// dado do comerciante
                                 startActivity(loja);
-
-
-
-                            }
+                                }
 
                             @Override
                             public void onLongItemClick(View view, int position) {
@@ -161,8 +158,6 @@ public class ClienteActivity extends AppCompatActivity {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
 
-
-
                 recuperarRestaurantesFirebase(key);
             }
 
@@ -199,7 +194,7 @@ public class ClienteActivity extends AppCompatActivity {
               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                   restaurantes.clear();
                   for (DataSnapshot ds: dataSnapshot.getChildren()){
-                      if(/*ds.getValue(ComercianteRecicleView.class).getLocalizacao() != null && */
+                      if(ds.getValue(ComercianteRecicleView.class).getLocalizacao() != null &&
                               ds.getValue(ComercianteRecicleView.class).getNome() != null) {
                           restaurantes.add(ds.getValue(ComercianteRecicleView.class));
                       }
