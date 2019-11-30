@@ -3,13 +3,14 @@ package com.izi.tcccliente.model;
 import com.google.firebase.database.DatabaseReference;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
+import java.io.Serializable;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Carrinho {
+public class Carrinho implements Serializable {
 
     private ComercianteRecicleView comerciante;
     private Cliente cliente;

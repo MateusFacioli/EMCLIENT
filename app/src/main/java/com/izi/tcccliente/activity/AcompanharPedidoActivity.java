@@ -3,6 +3,7 @@ package com.izi.tcccliente.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +25,7 @@ import com.izi.tcccliente.helper.UsuarioFirebase;
 import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.LojaRecicleView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +57,9 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //Msg_alertas("Deseja finalizar as compras?",1);
+                ArrayList<Carrinho> carinho = (ArrayList<Carrinho>) carrinhos;
                 Intent qrcode = new Intent(AcompanharPedidoActivity.this, ConfirmarPedidos.class);
+               // qrcode.putParcelableArrayListExtra("carrinhos", (ArrayList<? extends Parcelable>) carinho);
                 startActivity(qrcode);
 
      }
@@ -117,17 +121,19 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
         DatabaseReference produtosRef = mDatabase
                 .child("cliente")
                 .child(UsuarioFirebase.getIdentificadorUsuario())
-                .child("pedidos");
+                .child("pedidos");// produtos com  orderby status
+
+        Query qProdutos = produtosRef.orderByChild("status").equalTo("pago");
 
 
-        produtosRef.addValueEventListener(new ValueEventListener() {
+        qProdutos.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 carrinhos.clear();
 
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                for(DataSnapshot ds: dataSnapshot.getChildren())
+                {
                     carrinhos.add(ds.getValue(Carrinho.class));
-
                 }
 
                 adapterPedidos.notifyDataSetChanged();

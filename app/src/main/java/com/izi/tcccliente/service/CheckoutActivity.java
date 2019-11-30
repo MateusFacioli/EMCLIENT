@@ -48,6 +48,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.izi.tcccliente.R;
 import com.izi.tcccliente.activity.AcompanharPedidoActivity;
 import com.izi.tcccliente.activity.Qr_codeGeneratorActivity;
+import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.Localizacao;
 
 
@@ -74,16 +75,13 @@ public class CheckoutActivity extends AppCompatActivity {
   private PlacesClient placesClient;
   private final int AUTOCOMPLETE_REQUEST_CODE = 99;
   private Intent iConfirma;
-  private Bundle bConfirma;
+  private Carrinho carrinho = new Carrinho();
 
   private TextView txtEnderecoFinalizar;
   private TextView txtNomeLoja;
   private TextView txtNomePedido;
 
-  private String nomePedido;
-  private String nomeLoja;
-  private String idLoja;
-  private String endereco;
+
 
   @RequiresApi(api = Build.VERSION_CODES.N)
   @Override
@@ -167,6 +165,8 @@ public class CheckoutActivity extends AppCompatActivity {
           //  handlePaymentSuccess(paymentData);
 
             Intent intent = new Intent(CheckoutActivity.this, AcompanharPedidoActivity.class);
+            carrinho.setStatus("pago");
+            carrinho.salvarPedido();
             startActivity(intent);
 
             break;
@@ -295,7 +295,6 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
     iConfirma = getIntent();
-    bConfirma = iConfirma.getExtras();
 
     txtNomeLoja = findViewById(R.id.txtNomeLoja);
     txtNomePedido = findViewById(R.id.txtNomePedido);
@@ -304,16 +303,7 @@ public class CheckoutActivity extends AppCompatActivity {
   }
   public void configurarComponentes(){
 
-    if(bConfirma != null){
-      nomePedido = bConfirma.get("nomePedido").toString();
-      nomeLoja = bConfirma.get("nomeLoja").toString();
-      idLoja = bConfirma.get("idLoja").toString();
-      //endereco = bConfirma.get("endereco").toString();
-      txtEnderecoFinalizar.setText(endereco);
-      txtNomeLoja.setText(nomeLoja);
-      txtNomePedido.setText(nomePedido);
-
-    }
+  carrinho = (Carrinho) iConfirma.getSerializableExtra("carrinho");
 
     toolbar = findViewById(R.id.tolbarcheck2);
     toolbar.setTitle("Confirmar Pedido");

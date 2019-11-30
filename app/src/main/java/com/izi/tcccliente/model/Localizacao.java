@@ -4,8 +4,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
 
+import java.io.Serializable;
 
-public class Localizacao {
+
+public class Localizacao implements Serializable {
 
     private Double latitude;
     private Double longitude;

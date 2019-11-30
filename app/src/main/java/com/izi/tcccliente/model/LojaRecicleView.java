@@ -1,6 +1,8 @@
 package com.izi.tcccliente.model;
 
-public class LojaRecicleView {
+import java.io.Serializable;
+
+public class LojaRecicleView implements Serializable {
 
     private String nome;
     private Double preco;

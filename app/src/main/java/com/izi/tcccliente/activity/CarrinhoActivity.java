@@ -60,7 +60,7 @@ public class CarrinhoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_carrinho);
         inicializarComponentes();
         configuraComponentes();
-        recuperarProdutos();
+        recuperarCarrinho();
 
 
         recicleCarrinho.addOnItemTouchListener(
@@ -97,16 +97,16 @@ public class CarrinhoActivity extends AppCompatActivity {
                     int i;
                     for (i=0 ; i < carrinhos.size(); i++) {
                         carrinho = carrinhos.get(i);
-                        carrinho.salvarPedido();
+                       // carrinho.salvarPedido();
                         carrinho.removerCarrinho();
 
                     }
 
-                    Intent inicio = new Intent(CarrinhoActivity.this, CheckoutActivity.class);
-                    inicio.putExtra("nomePedido", carrinho.getProduto().getNome());
-                    inicio.putExtra("nomeLoja", carrinho.getComerciante().getNome());
-                    inicio.putExtra("idLoja", carrinho.getComerciante().getUid());
-                    startActivity(inicio);
+                    Bundle bundle = new Bundle();
+                    Intent checkOut = new Intent(CarrinhoActivity.this, CheckoutActivity.class);
+                    bundle.putSerializable("carrinho", carrinho);
+                    checkOut.putExtras(bundle);
+                    startActivity(checkOut);
                     finish();
                   //  Class<LojaActivity> loja = LojaActivity.class;
 
@@ -121,10 +121,10 @@ public class CarrinhoActivity extends AppCompatActivity {
 
 
 
-    private void recuperarProdutos(){
+    private void recuperarCarrinho(){
         Query produtosRef = mDatabase
                 .child("carrinho")
-                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());
+                .child(UsuarioFirebase.getDadosUsuarioLogado().getUid());// recuperar com status carrinho
 
 
         produtosRef.addValueEventListener(new ValueEventListener() {
@@ -136,10 +136,6 @@ public class CarrinhoActivity extends AppCompatActivity {
                     carrinhos.add(ds.getValue(Carrinho.class));
 
                 }
-
-
-
-
                 adapterCarrinho.notifyDataSetChanged();
             }
 

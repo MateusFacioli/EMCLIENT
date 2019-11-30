@@ -40,12 +40,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.izi.tcccliente.R;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
+import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.Localizacao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConfirmarPedidos extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RoutingListener {
+
 
     private Toolbar toolbar;
     private ImageView btnConfimarPedido;
@@ -56,6 +58,7 @@ public class ConfirmarPedidos extends FragmentActivity implements OnMapReadyCall
     private ProgressDialog progressDialog;
     private Button  btnRecebido;
 
+    private ArrayList<? extends Carrinho> carrinhos = new ArrayList<>();
     private Localizacao local = new Localizacao();
 
     private DatabaseReference mDatabase;
@@ -135,6 +138,8 @@ public class ConfirmarPedidos extends FragmentActivity implements OnMapReadyCall
     }
     private void inicializarComponentes(){
         btnRecebido = findViewById(R.id.btnRecebido);
+        iConfirma = getIntent();
+        //carrinhos = iConfirma.getParcelableArrayListExtra("carrinhos");
 
     }
     private void recuperarEmpresas(){

@@ -3,19 +3,22 @@ package com.izi.tcccliente.model;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
 
-public class Pedidos {
+public class Pedidos implements Serializable {
 
     private LojaRecicleView produto;
     private Double quantidade;
     private String categoria;
     private String estado;
     private String idPedido;
+
 
 
 

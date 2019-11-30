@@ -3,7 +3,9 @@ package com.izi.tcccliente.model;
 import com.google.firebase.database.DatabaseReference;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
 
     private String uid;
     private String nome;
