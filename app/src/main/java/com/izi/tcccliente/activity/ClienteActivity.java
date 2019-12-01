@@ -235,7 +235,7 @@ public class ClienteActivity extends AppCompatActivity {
 
     public void vaipedidos(View view)
     {
-        Msg_alertas("Desesja ver seus pedidos atuais ?",3);
+        Msg_alertas("Desesja ver seu histórico de pedidos ?",3);
     }
 
     public void vaicarrinho(View view)

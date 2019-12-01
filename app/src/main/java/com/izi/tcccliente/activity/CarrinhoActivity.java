@@ -3,6 +3,7 @@ package com.izi.tcccliente.activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,7 +50,6 @@ public class CarrinhoActivity extends AppCompatActivity {
     private Carrinho carrinho = new Carrinho();
     private List<LojaRecicleView> loja = new ArrayList<>();
     private List<Carrinho> carrinhos = new ArrayList<>();
-
     private FloatingActionButton floatPedido;
 
     private Toolbar toolbar;
@@ -57,7 +59,7 @@ public class CarrinhoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_carrinho);
+        setContentView(R.layout.activity_carrinho);// aqui chama activty que tem que chamar um content
         inicializarComponentes();
         configuraComponentes();
         recuperarCarrinho();
@@ -74,10 +76,9 @@ public class CarrinhoActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onLongItemClick(View view, int position) {
+                            public void onLongItemClick(View view, final int position) {
 
-                                Carrinho produtoSelecionado = carrinhos.get(position);
-                                produtoSelecionado.removerCarrinho();
+
                             }
 
                             @Override
@@ -89,13 +90,16 @@ public class CarrinhoActivity extends AppCompatActivity {
         );
 
 
+
         floatPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(carrinho != null) {
+                if(carrinho != null && carrinhos.size()>0)
+                {
                     int i;
-                    for (i=0 ; i < carrinhos.size(); i++) {
+                    for (i=0 ; i < carrinhos.size(); i++)
+                    {
                         carrinho = carrinhos.get(i);
                        // carrinho.salvarPedido();
                         carrinho.removerCarrinho();
@@ -111,6 +115,10 @@ public class CarrinhoActivity extends AppCompatActivity {
                   //  Class<LojaActivity> loja = LojaActivity.class;
 
                 }
+                else
+                    {
+                        Toast.makeText(CarrinhoActivity.this, "Adicione algo no carrinho para prosseguir", Toast.LENGTH_SHORT).show();
+                    }
 
 
             }
@@ -153,6 +161,7 @@ public class CarrinhoActivity extends AppCompatActivity {
     private void configuraComponentes(){
         recicleCarrinho.setLayoutManager(new LinearLayoutManager(this));
         recicleCarrinho.setHasFixedSize(true);
+
         adapterCarrinho = new AdapterCarrinho(carrinhos);
         recicleCarrinho.setAdapter(adapterCarrinho);
 
@@ -160,25 +169,12 @@ public class CarrinhoActivity extends AppCompatActivity {
             idComerciante = bCarrinho.get("idComerciante").toString();
             idProduto = bCarrinho.get("uidProduto").toString();
 
-            String retorno = getALL(idComerciante,idProduto);// PRECISO DOS DADOS
         }
 
         toolbar.setTitle("Carrinho");
         setSupportActionBar(toolbar);
 
 
-
-    }
-    public String getALL(String comerciante, String produto)
-    {
-
-           String texto="{ ";
-        texto+="Id_comerciante: "+comerciante.toString().trim()+" Id_produto: "+produto.toString().trim()+" }";
-        return  texto;
-        // preciso id_Comerciante
-        //produto_id
-        //valor
-        //quantidade
 
     }
     private void inicializarComponentes(){

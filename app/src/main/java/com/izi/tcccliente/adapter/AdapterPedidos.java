@@ -21,7 +21,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.MyViewHo
 
     private List<Carrinho> carrinho;
     private AlertDialog alerta;
-    private Button delete_item;
+
 
     public AdapterPedidos(List<Carrinho> carrinhos){
         this.carrinho = carrinhos;
@@ -70,28 +70,6 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.MyViewHo
             nomeProduto = itemView.findViewById(R.id.txtNomeProdutoPedido);
             descricao = itemView.findViewById(R.id.txtDescricaoPedido);
             valor = itemView.findViewById(R.id.txtPrecoPedido);
-            delete_item=itemView.findViewById(R.id.del_item);
-
-
-           delete_item.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Snackbar snackbar;
-                    snackbar =Snackbar.make(v,"Quer realmente deletar esse produto?",Snackbar.LENGTH_INDEFINITE);
-                    snackbar.show();
-                    snackbar.setAction("OK", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Carrinho produtoSelecionado =carrinho.get(getAdapterPosition());
-                           produtoSelecionado.removerCarrinho();
-                           //nao esta removendo
-
-                        }
-                    });
-
-
-                }
-            });
 
 
         }
