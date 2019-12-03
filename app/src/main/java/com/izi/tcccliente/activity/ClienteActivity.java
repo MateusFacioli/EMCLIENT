@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.view.GravityCompat;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -63,6 +64,7 @@ public class ClienteActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private FloatingActionMenu btn_menu;
     private LatLng localCliente;
+    private List<String> idList = new ArrayList<>();
 
     private AdapterEmpresa adapterRestaurante;
     private List<ComercianteRecicleView> restaurantes = new ArrayList<>();
@@ -149,6 +151,7 @@ public class ClienteActivity extends AppCompatActivity {
         GeoFire geoFire = new GeoFire(localUsuario);
 
 
+
         final GeoQuery geoQuery = geoFire.queryAtLocation(
                 new GeoLocation(localCliente.latitude, localCliente.longitude),
                 1//em km (0.05 50 metros)
@@ -158,7 +161,10 @@ public class ClienteActivity extends AppCompatActivity {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
 
-                recuperarRestaurantesFirebase(key);
+                    idList.add(key);
+
+                recuperarRestaurantesFirebase();
+
             }
 
             @Override
@@ -185,32 +191,44 @@ public class ClienteActivity extends AppCompatActivity {
 
     }
 
-    private void recuperarRestaurantesFirebase(String id){
+    private void recuperarRestaurantesFirebase(){
 
-         DatabaseReference retaurantesRef = mDatabase.child("comerciante");
-        Query restaurantesQ = retaurantesRef.orderByChild("uid").equalTo(id);
-          restaurantesQ.addValueEventListener(new ValueEventListener() {
-              @Override
-              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                  restaurantes.clear();
-                  for (DataSnapshot ds: dataSnapshot.getChildren()){
-                      if(ds.getValue(ComercianteRecicleView.class).getLocalizacao() != null &&
-                              ds.getValue(ComercianteRecicleView.class).getNome() != null) {
-                          restaurantes.add(ds.getValue(ComercianteRecicleView.class));
-                      }
-                  }
+        restaurantes.clear();
 
-                  adapterRestaurante.notifyDataSetChanged();
+        for(int i = 0; i < idList.size(); i ++){
 
-              }
+                DatabaseReference retaurantesRef = mDatabase.child("comerciante");
+                Query restaurantesQ = retaurantesRef.orderByChild("uid").equalTo(idList.get(i));
+                restaurantesQ.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-              @Override
-              public void onCancelled(@NonNull DatabaseError databaseError) {
+                        if(restaurantes.size() < idList.size()) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-              }
-          });
+                                restaurantes.add(ds.getValue(ComercianteRecicleView.class));
 
+                            }
+
+
+                                adapterRestaurante.notifyDataSetChanged();
+
+                    }
+
+                }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+
+        }
     }
+
 
     @Override
     public void onBackPressed() {
