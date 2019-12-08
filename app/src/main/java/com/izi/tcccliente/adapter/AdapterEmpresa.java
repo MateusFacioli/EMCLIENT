@@ -23,6 +23,7 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHo
 
     private List<ComercianteRecicleView> empresas;
 
+
     public AdapterEmpresa(List<ComercianteRecicleView> empresas) {
         this.empresas = empresas;
     }

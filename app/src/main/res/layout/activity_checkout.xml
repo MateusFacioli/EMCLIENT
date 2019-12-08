@@ -52,40 +52,58 @@
         android:layout_width="379dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="92dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
         android:background="@drawable/bg_edit_text"
         app:layout_constraintBottom_toTopOf="@+id/txtNomeLoja"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tolbarcheck2" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/googlestatus"
+        android:layout_width="match_parent"
+        android:layout_height="19dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center"
+        android:text="@string/googlepay_status_checking"
+        app:layout_constraintBottom_toBottomOf="@+id/frameLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/bordapedido"
         android:layout_width="379dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="108dp"
         android:background="@drawable/bg_edit_text"
+        app:layout_constraintBottom_toTopOf="@+id/reciclerMostrar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEnderecoFinalizar" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/bordaendereco"
-        android:layout_width="379dp"
-        android:layout_height="34dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/bg_edit_text"
-        app:layout_constraintBottom_toTopOf="@+id/txtEnderecoFinalizar"
+        android:id="@+id/txtNomeLoja"
+        android:layout_width="171dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView22"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNomeLoja"
-        tools:ignore="UnknownId" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView21"
@@ -103,22 +121,6 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Endereço de Entrega"
-        android:textColor="#141414"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/bordaendereco"
-        app:layout_constraintEnd_toEndOf="@+id/bordaendereco"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="@+id/bordaendereco"
-        app:layout_constraintTop_toTopOf="@+id/bordaendereco"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/textView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -130,51 +132,18 @@
         app:layout_constraintStart_toStartOf="@+id/bordapedido"
         app:layout_constraintTop_toTopOf="@+id/bordapedido" />
 
-    <TextView
-        android:id="@+id/googlestatus"
-        android:layout_width="379dp"
-        android:layout_height="19dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="96dp"
-        android:gravity="center"
-        android:text="@string/googlepay_status_checking"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reciclerMostrar"
+        android:layout_width="match_parent"
+        android:layout_height="205dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/googlestatus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/txtNomeLoja"
-        android:layout_width="127dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="142dp"
-        android:layout_marginEnd="142dp"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/bordaendereco"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bordaloja" />
-
-    <TextView
-        android:id="@+id/txtEnderecoFinalizar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        android:text="           TextView"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/bordapedido"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bordaendereco" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.868" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tolbarcheck2"
@@ -186,59 +155,12 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toTopOf="@+id/bordaloja"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintVertical_chainStyle="spread_inside"
         tools:ignore="MissingConstraints" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="266dp"
-        android:layout_height="56dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.137"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bordapedido"
-        app:layout_constraintVertical_bias="0.05">
-
-        <TextView
-            android:id="@+id/txtNomePedido"
-            android:layout_width="123dp"
-            android:layout_height="49dp"
-            android:gravity="center"
-            android:text="produto"
-            android:textSize="20sp"
-            tools:ignore="MissingConstraints" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="R$ 10,00"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bordapedido"
-        app:layout_constraintVertical_bias="0.087" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="59dp"
-        android:layout_height="52dp"
-        app:layout_constraintBottom_toTopOf="@+id/txtEnderecoFinalizar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bordaendereco"
-        app:srcCompat="@drawable/icon" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -31,6 +31,7 @@ import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.LojaRecicleView;
 import com.izi.tcccliente.service.CheckoutActivity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +109,7 @@ public class CarrinhoActivity extends AppCompatActivity {
 
                     Bundle bundle = new Bundle();
                     Intent checkOut = new Intent(CarrinhoActivity.this, CheckoutActivity.class);
-                    bundle.putSerializable("carrinho", carrinho);
+                    bundle.putSerializable("carrinho", (Serializable) carrinhos);
                     checkOut.putExtras(bundle);
                     startActivity(checkOut);
                     finish();

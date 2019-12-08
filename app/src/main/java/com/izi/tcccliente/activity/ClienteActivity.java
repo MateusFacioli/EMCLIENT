@@ -81,8 +81,10 @@ public class ClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cliente);
         inicializarComponentes();
         configuraRecicleView();
-        //recuperarRestaurantesFirebase();
         verificarDistancia();
+        //recuperarRestaurantesFirebase();
+
+
 
         /**
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -140,6 +142,7 @@ public class ClienteActivity extends AppCompatActivity {
 
     private void verificarDistancia( ){
 
+
         localCliente = new LatLng(
                 Double.parseDouble("-22.831938"),
                 Double.parseDouble("-47.050647")
@@ -151,7 +154,6 @@ public class ClienteActivity extends AppCompatActivity {
         GeoFire geoFire = new GeoFire(localUsuario);
 
 
-
         final GeoQuery geoQuery = geoFire.queryAtLocation(
                 new GeoLocation(localCliente.latitude, localCliente.longitude),
                 1//em km (0.05 50 metros)
@@ -160,25 +162,31 @@ public class ClienteActivity extends AppCompatActivity {
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
-
+                    idList.clear();
                     idList.add(key);
+                    recuperarRestaurantesFirebase();
 
-                recuperarRestaurantesFirebase();
 
             }
 
             @Override
             public void onKeyExited(String key) {
 
+
+
             }
 
             @Override
             public void onKeyMoved(String key, GeoLocation location) {
 
+                idList.add(key);
+                recuperarRestaurantesFirebase();
             }
 
             @Override
             public void onGeoQueryReady() {
+
+
 
             }
 
@@ -193,8 +201,8 @@ public class ClienteActivity extends AppCompatActivity {
 
     private void recuperarRestaurantesFirebase(){
 
-        restaurantes.clear();
 
+        restaurantes.clear();
         for(int i = 0; i < idList.size(); i ++){
 
                 DatabaseReference retaurantesRef = mDatabase.child("comerciante");
@@ -203,17 +211,18 @@ public class ClienteActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                        if(restaurantes.size() < idList.size()) {
-                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                          //  if (restaurantes.size() < idList.size()) {
+                                for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                                restaurantes.add(ds.getValue(ComercianteRecicleView.class));
+                                    restaurantes.add(ds.getValue(ComercianteRecicleView.class));
 
-                            }
-
+                                }
+                        Toast.makeText(ClienteActivity.this, restaurantes.get(0).getAvaliacao().getAvaliacao().toString(), Toast.LENGTH_SHORT).show();
 
                                 adapterRestaurante.notifyDataSetChanged();
 
-                    }
+                        //    }
+
 
                 }
 
@@ -223,10 +232,8 @@ public class ClienteActivity extends AppCompatActivity {
                     }
                 });
 
-
-
-
         }
+
     }
 
 

@@ -14,10 +14,19 @@ public class ComercianteRecicleView implements Serializable {
     private String telefone;
     private String senha;
     private Localizacao localizacao;
+    private Avaliacao avaliacao;
 
 
 
     public ComercianteRecicleView() {
+    }
+
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
     public Localizacao getLocalizacao() {

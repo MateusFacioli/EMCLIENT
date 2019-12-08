@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +16,11 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.izi.tcccliente.R;
+import com.izi.tcccliente.model.Carrinho;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Qr_codeGeneratorActivity extends AppCompatActivity {
@@ -23,14 +28,17 @@ public class Qr_codeGeneratorActivity extends AppCompatActivity {
     private Button scan;
     private ImageView qr_code;
     private TextView information;
+    private Intent iQRcode;
+
+
+    private List<Carrinho> carrinhos = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qr_code_generator);
-        scan=findViewById(R.id.open_class);
-        qr_code=findViewById(R.id.qr_code);
-        information=findViewById(R.id.texto_qrcode);
+        inicializarComponentes();
+
         CarrinhoActivity carrinhoActivity;
         carrinhoActivity= new CarrinhoActivity();
        // String json= carrinhoActivity.getALL();
@@ -62,7 +70,11 @@ public class Qr_codeGeneratorActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
+
+         //       Toast.makeText(Qr_codeGeneratorActivity.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
+
                 Intent inicio = new Intent(Qr_codeGeneratorActivity.this, Activity_Recebido.class);
+                inicio.putExtra("idLoja", carrinhos.get(0).getComerciante().getUid());
                 startActivity(inicio);
                 finish();
                 /*
@@ -94,6 +106,15 @@ public class Qr_codeGeneratorActivity extends AppCompatActivity {
     private void exibirMensagem(String texto){
         Toast.makeText(this, texto, Toast.LENGTH_SHORT)
                 .show();
+    }
+
+    private void inicializarComponentes(){
+        scan=findViewById(R.id.open_class);
+        qr_code=findViewById(R.id.qr_code);
+        information=findViewById(R.id.texto_qrcode);
+        iQRcode = getIntent();
+        carrinhos = (List<Carrinho>) iQRcode.getSerializableExtra("carrinho");
+
     }
 
 }

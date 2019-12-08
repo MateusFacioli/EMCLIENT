@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +34,8 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
 
     private RecyclerView recicleCarrinho;
     private AdapterPedidos adapterPedidos;
+    private Intent iAcompanhar;
+
 
     private Toolbar toolbar;
     private List<LojaRecicleView> produtos = new ArrayList<>();
@@ -50,15 +53,19 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
 
         inicializarComponentes();
         configuraComponentes();
-        recuperarProdutos();
+        //recuperarProdutos();
 
         floatFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //Msg_alertas("Deseja finalizar as compras?",1);
+                Bundle bundle = new Bundle();
                 ArrayList<Carrinho> carinho = (ArrayList<Carrinho>) carrinhos;
                 Intent qrcode = new Intent(AcompanharPedidoActivity.this, ConfirmarPedidos.class);
+                bundle.putSerializable("carrinho", (Serializable) carrinhos);
+                qrcode.putExtras(bundle);
+                Toast.makeText(AcompanharPedidoActivity.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
                // qrcode.putParcelableArrayListExtra("carrinhos", (ArrayList<? extends Parcelable>) carinho);
                 startActivity(qrcode);
 
@@ -117,7 +124,8 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
         //Exibe
         alerta.show();
     }
-    private void recuperarProdutos(){
+
+    /*private void recuperarProdutos(){
         DatabaseReference produtosRef = mDatabase
                 .child("cliente")
                 .child(UsuarioFirebase.getIdentificadorUsuario())
@@ -144,14 +152,17 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 
     private void configuraComponentes(){
+        carrinhos = (List<Carrinho>) iAcompanhar.getSerializableExtra("carrinho");
+
         recicleCarrinho.setLayoutManager(new LinearLayoutManager(this));
         recicleCarrinho.setHasFixedSize(true);
         adapterPedidos = new AdapterPedidos(carrinhos);
         recicleCarrinho.setAdapter(adapterPedidos);
+
 
 
         //toolbar.setTitle("Carrinho");
@@ -165,6 +176,7 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
         recicleCarrinho = findViewById(R.id.reciclePedido);
         mDatabase = ConfiguracaoFirebase.getFirebase();
 
+        iAcompanhar = getIntent();
         floatFinalizar = findViewById(R.id.floatingFinalizar);
 
         toolbar = findViewById(R.id.tb_acompanha);

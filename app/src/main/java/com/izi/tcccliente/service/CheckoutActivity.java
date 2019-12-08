@@ -25,6 +25,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -48,6 +50,9 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.izi.tcccliente.R;
 import com.izi.tcccliente.activity.AcompanharPedidoActivity;
 import com.izi.tcccliente.activity.Qr_codeGeneratorActivity;
+import com.izi.tcccliente.adapter.AdapterCarrinho;
+import com.izi.tcccliente.adapter.AdapterEmpresa;
+import com.izi.tcccliente.adapter.AdapterLoja;
 import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.Localizacao;
 
@@ -55,6 +60,8 @@ import com.izi.tcccliente.model.Localizacao;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -76,10 +83,14 @@ public class CheckoutActivity extends AppCompatActivity {
   private final int AUTOCOMPLETE_REQUEST_CODE = 99;
   private Intent iConfirma;
   private Carrinho carrinho = new Carrinho();
+  private List<Carrinho> carrinhos = new ArrayList<>();
+  private AdapterCarrinho adapterCarrinho;
 
   private TextView txtEnderecoFinalizar;
   private TextView txtNomeLoja;
   private TextView txtNomePedido;
+
+  private RecyclerView recyclerMostrar;
 
 
 
@@ -108,12 +119,12 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
     mGooglePayButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-            requestPayment(view);
-          }
-        });
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                requestPayment(view);
+              }
+            });
   }
 
 
@@ -132,16 +143,16 @@ public class CheckoutActivity extends AppCompatActivity {
     // OnCompleteListener to be triggered when the result of the call is known.
     Task<Boolean> task = mPaymentsClient.isReadyToPay(request);
     task.addOnCompleteListener(this,
-        new OnCompleteListener<Boolean>() {
-          @Override
-          public void onComplete(@NonNull Task<Boolean> task) {
-            if (task.isSuccessful()) {
-              setGooglePayAvailable(task.getResult());
-            } else {
-              Log.w("isReadyToPay failed", task.getException());
-            }
-          }
-        });
+            new OnCompleteListener<Boolean>() {
+              @Override
+              public void onComplete(@NonNull Task<Boolean> task) {
+                if (task.isSuccessful()) {
+                  setGooglePayAvailable(task.getResult());
+                } else {
+                  Log.w("isReadyToPay failed", task.getException());
+                }
+              }
+            });
   }
 
   private void setGooglePayAvailable(boolean available) {
@@ -154,19 +165,31 @@ public class CheckoutActivity extends AppCompatActivity {
   }
 
 
+
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {
     switch (requestCode) {
-        // value passed in AutoResolveHelper
+      // value passed in AutoResolveHelper
       case LOAD_PAYMENT_DATA_REQUEST_CODE:
         switch (resultCode) {
           case Activity.RESULT_OK:
-         //   PaymentData paymentData = PaymentData.getFromIntent(data);
-          //  handlePaymentSuccess(paymentData);
+            //   PaymentData paymentData = PaymentData.getFromIntent(data);
+            //  handlePaymentSuccess(paymentData);
 
+            Bundle bundle = new Bundle();
             Intent intent = new Intent(CheckoutActivity.this, AcompanharPedidoActivity.class);
-            carrinho.setStatus("pago");
-            carrinho.salvarPedido();
+            for(int i = 0 ; i< carrinhos.size(); i++ ){
+              carrinho.setCliente(carrinhos.get(i).getCliente());
+              carrinho.setComerciante(carrinhos.get(i).getComerciante());
+              carrinho.setProduto(carrinhos.get(i).getProduto());
+              carrinho.setStatus("pago");
+              carrinho.setIdpedido(carrinhos.get(i).getIdpedido());
+              carrinho.setDataX(carrinhos.get(i).getDataX());
+              carrinho.salvarPedido();
+
+            }
+            bundle.putSerializable("carrinho", (Serializable) carrinhos);
+            intent.putExtras(bundle);
             startActivity(intent);
 
             break;
@@ -220,26 +243,26 @@ public class CheckoutActivity extends AppCompatActivity {
               .getJSONObject("tokenizationData")
               .getString("type")
               .equals("PAYMENT_GATEWAY")
-          && paymentMethodData
+              && paymentMethodData
               .getJSONObject("tokenizationData")
               .getString("token")
               .equals("examplePaymentMethodToken")) {
         AlertDialog alertDialog =
-            new AlertDialog.Builder(this)
-                .setTitle("Warning")
-                .setMessage(
-                    "Gateway name set to \"example\" - please modify "
-                        + "Constants.java and replace it with your own gateway.")
-                .setPositiveButton("OK", null)
-                .create();
+                new AlertDialog.Builder(this)
+                        .setTitle("Warning")
+                        .setMessage(
+                                "Gateway name set to \"example\" - please modify "
+                                        + "Constants.java and replace it with your own gateway.")
+                        .setPositiveButton("OK", null)
+                        .create();
         alertDialog.show();
       }
 
       String billingName =
-          paymentMethodData.getJSONObject("info").getJSONObject("billingAddress").getString("name");
+              paymentMethodData.getJSONObject("info").getJSONObject("billingAddress").getString("name");
       Log.d("BillingName", billingName);
-     // Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG)
-         // .show();
+      // Toast.makeText(this, getString(R.string.payments_show_name, billingName), Toast.LENGTH_LONG)
+      // .show();
 
       // Logging token string.
       Log.d("GooglePaymentToken", paymentMethodData.getJSONObject("tokenizationData").getString("token"));
@@ -271,43 +294,49 @@ public class CheckoutActivity extends AppCompatActivity {
       return;
     }
     PaymentDataRequest request =
-        PaymentDataRequest.fromJson(paymentDataRequestJson.get().toString());
+            PaymentDataRequest.fromJson(paymentDataRequestJson.get().toString());
 
     // Since loadPaymentData may show the UI asking the user to select a payment method, we use
     // AutoResolveHelper to wait for the user interacting with it. Once completed,
     // onActivityResult will be called with the result.
     if (request != null) {
       AutoResolveHelper.resolveTask(
-          mPaymentsClient.loadPaymentData(request), this, LOAD_PAYMENT_DATA_REQUEST_CODE);
+              mPaymentsClient.loadPaymentData(request), this, LOAD_PAYMENT_DATA_REQUEST_CODE);
     }
   }
   //private void initItemUI() {
-    //TextView itemName = findViewById(R.id.text_item_name);
-    //ImageView itemImage = findViewById(R.id.image_item_image);
-   // TextView itemPrice = findViewById(R.id.text_item_price);
+  //TextView itemName = findViewById(R.id.text_item_name);
+  //ImageView itemImage = findViewById(R.id.image_item_image);
+  // TextView itemPrice = findViewById(R.id.text_item_price);
 
-    //itemName.setText(mBikeItem.getName());
-   // itemImage.setImageResource(mBikeItem.getImageResourceId());
-    //itemPrice.setText(PaymentsUtil.microsToString(mBikeItem.getPriceMicros()));
+  //itemName.setText(mBikeItem.getName());
+  // itemImage.setImageResource(mBikeItem.getImageResourceId());
+  //itemPrice.setText(PaymentsUtil.microsToString(mBikeItem.getPriceMicros()));
   //}
-
   private void inicializarComponenetes(){
 
 
     iConfirma = getIntent();
 
     txtNomeLoja = findViewById(R.id.txtNomeLoja);
-    txtNomePedido = findViewById(R.id.txtNomePedido);
     txtNomeLoja = findViewById(R.id.txtNomeLoja);
-    txtEnderecoFinalizar = findViewById(R.id.txtEnderecoFinalizar);
+    recyclerMostrar = findViewById(R.id.reciclerMostrar);
   }
   public void configurarComponentes(){
 
-  carrinho = (Carrinho) iConfirma.getSerializableExtra("carrinho");
+    carrinhos = (List<Carrinho>) iConfirma.getSerializableExtra("carrinho");
+    recyclerMostrar.setLayoutManager(new LinearLayoutManager(this));
+    recyclerMostrar.setHasFixedSize(true);
+    adapterCarrinho = new AdapterCarrinho(carrinhos);
+    recyclerMostrar.setAdapter(adapterCarrinho);
+
+    txtNomeLoja.setText(carrinhos.get(0).getComerciante().getNome());
 
     toolbar = findViewById(R.id.tolbarcheck2);
     toolbar.setTitle("Confirmar Pedido");
     setSupportActionBar(toolbar);
+
+
 
 
   }

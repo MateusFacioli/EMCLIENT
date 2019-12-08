@@ -43,6 +43,7 @@ import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.Localizacao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,14 +59,13 @@ public class ConfirmarPedidos extends FragmentActivity implements OnMapReadyCall
     private ProgressDialog progressDialog;
     private Button  btnRecebido;
 
-    private ArrayList<? extends Carrinho> carrinhos = new ArrayList<>();
+    private List<Carrinho> carrinhos = new ArrayList<>();
     private Localizacao local = new Localizacao();
 
     private DatabaseReference mDatabase;
 
     private String idLoja;
 
-    private Bundle bConfirma;
     private Intent iConfirma;
 
     @Override
@@ -101,8 +101,13 @@ public class ConfirmarPedidos extends FragmentActivity implements OnMapReadyCall
         btnRecebido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
                 Intent confirmar = new Intent(ConfirmarPedidos.this, Qr_codeGeneratorActivity.class);
+               // String idLoja = carrinhos.get(0).getComerciante().getUid();
+                bundle.putSerializable("carrinho", (Serializable) carrinhos);
+                confirmar.putExtras(bundle);
                 startActivity(confirmar);
+                Toast.makeText(ConfirmarPedidos.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -139,7 +144,7 @@ public class ConfirmarPedidos extends FragmentActivity implements OnMapReadyCall
     private void inicializarComponentes(){
         btnRecebido = findViewById(R.id.btnRecebido);
         iConfirma = getIntent();
-        //carrinhos = iConfirma.getParcelableArrayListExtra("carrinhos");
+        carrinhos = (List<Carrinho>) iConfirma.getSerializableExtra("carrinho");
 
     }
     private void recuperarEmpresas(){
