@@ -51,13 +51,20 @@ public class PedidosActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
-                               // Intent loja = new Intent(PedidosActivity.this, Activity Que Vai Mostrar Detalhes do pedido.class);
+
+
+                                Intent loja = new Intent(PedidosActivity.this, VisualizarPedidoActivity.class);
+                                PedidosActivity pedido = new PedidosActivity();
                                 Carrinho carrinho = carrinhos.get(position);
+                                String idpedido = carrinho.getIdpedido();
+                                loja.putExtra("idPedido",idpedido);
+                                startActivity(loja);
 
                             }
 
                             @Override
-                            public void onLongItemClick(View view, int position) {
+                            public void onLongItemClick(View view, int position)
+                            {
 
                             }
 
@@ -117,6 +124,7 @@ public class PedidosActivity extends AppCompatActivity {
       //  iPedidos = getIntent();
         recyclerPedidos123 = findViewById(R.id.reciclerPedidos123);
         mDatabase = ConfiguracaoFirebase.getFirebase();
+        Toast.makeText(PedidosActivity.this, "Clique no produto  para obter mais informações", Toast.LENGTH_SHORT).show();
 
     }
 }

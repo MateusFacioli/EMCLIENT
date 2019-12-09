@@ -31,6 +31,7 @@
         -->
         <activity android:name=".activity.Activity_Recebido" />
         <activity android:name=".activity.Locais" />
+        <activity android:name=".activity.VisualizarPedidoActivity" />
 
         <activity android:name=".activity.CarrinhoActivity" />
         <activity android:name=".activity.LojaActivity" />

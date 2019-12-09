@@ -65,7 +65,7 @@ public class AcompanharPedidoActivity extends AppCompatActivity {
                 Intent qrcode = new Intent(AcompanharPedidoActivity.this, ConfirmarPedidos.class);
                 bundle.putSerializable("carrinho", (Serializable) carrinhos);
                 qrcode.putExtras(bundle);
-                Toast.makeText(AcompanharPedidoActivity.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(AcompanharPedidoActivity.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
                // qrcode.putParcelableArrayListExtra("carrinhos", (ArrayList<? extends Parcelable>) carinho);
                 startActivity(qrcode);
 

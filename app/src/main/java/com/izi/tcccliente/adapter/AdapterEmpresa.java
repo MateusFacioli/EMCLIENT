@@ -44,7 +44,7 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHo
             if(empresa.getReserva() != null)//empresas.get(j).getReserva() nao foi
             {   //Avaliacao avaliacao= new Avaliacao();
                 holder.aval.setText(empresa.getAvaliacao().getComentario()+" "+empresa.getAvaliacao().getAvaliacao());
-                holder.disp.setText("Reserva ");
+                holder.disp.setText(empresa.getReserva().getDate()+" "+empresa.getReserva().getTimeInicio()+" - "+empresa.getReserva().getTimeFinal());
             }
             else
             {
