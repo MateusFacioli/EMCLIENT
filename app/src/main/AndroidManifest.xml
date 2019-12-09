@@ -6,37 +6,21 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
-    <uses-feature
-        android:name="android.hardware.camera2"
-        android:required="true" />
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-
-
     <application
-        android:configChanges="orientation|screenSize"
         android:allowBackup="true"
+        android:configChanges="orientation|screenSize"
         android:icon="@mipmap/ic_logoeasymealcliente"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_logoeasymealcliente_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.PedidosActivity"></activity>
         <activity
             android:name=".activity.AcompanharPedidoActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_acompanhar_pedido"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="orientation|screenSize">
-        </activity>
-<activity android:name=".activity.Qr_codeGeneratorActivity" >
-
-
-
-</activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activity.Qr_codeGeneratorActivity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -45,6 +29,30 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
+        <activity android:name=".activity.Activity_Recebido" />
+        <activity android:name=".activity.Locais" />
+
+        <activity android:name=".activity.CarrinhoActivity" />
+        <activity android:name=".activity.LojaActivity" />
+        <activity android:name=".activity.ConfirmarPedidos" />
+        <activity
+            android:name=".activity.ClienteActivity"
+            android:label="@string/title_activity_cliente"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".service.CheckoutActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.CadastrarActivity" />
+        <activity android:name=".activity.ResetActivity" />
+
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -52,21 +60,6 @@
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
-
-        <activity android:name=".activity.Activity_Recebido"></activity>
-        <activity android:name=".activity.Locais"/>
-        <activity android:name=".activity.CarrinhoActivity" />
-        <activity android:name=".activity.LojaActivity" />
-        <activity android:name=".activity.ConfirmarPedidos" />
-
-        <activity
-            android:name=".activity.ClienteActivity"
-            android:label="@string/title_activity_cliente"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".service.CheckoutActivity"
-            android:screenOrientation="portrait"/>
-
         <meta-data
             android:name="com.facebook.accountkit.ApplicationName"
             android:value="@string/app_name" />
@@ -76,17 +69,17 @@
         <meta-data
             android:name="com.facebook.accountkit.ClientToken"
             android:value="@string/ACCOUNT_KIT_CLIENT_TOKEN" />
-
-        <activity android:name=".activity.CadastrarActivity" />
-        <activity android:name=".activity.ResetActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
+
+    <uses-feature
+        android:name="android.hardware.camera2"
+        android:required="true" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

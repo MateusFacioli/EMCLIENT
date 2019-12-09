@@ -6,25 +6,19 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v4.view.GravityCompat;
-import android.util.Log;
-import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
@@ -34,9 +28,6 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -81,8 +72,11 @@ public class ClienteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cliente);
         inicializarComponentes();
         configuraRecicleView();
-        verificarDistancia();
+
         //recuperarRestaurantesFirebase();
+
+
+
 
 
 
@@ -137,8 +131,12 @@ public class ClienteActivity extends AppCompatActivity {
         );
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
 
-
+        verificarDistancia();
+    }
 
     private void verificarDistancia( ){
 
@@ -217,7 +215,7 @@ public class ClienteActivity extends AppCompatActivity {
                                     restaurantes.add(ds.getValue(ComercianteRecicleView.class));
 
                                 }
-                        Toast.makeText(ClienteActivity.this, restaurantes.get(0).getAvaliacao().getAvaliacao().toString(), Toast.LENGTH_SHORT).show();
+
 
                                 adapterRestaurante.notifyDataSetChanged();
 
@@ -233,6 +231,8 @@ public class ClienteActivity extends AppCompatActivity {
                 });
 
         }
+
+
 
     }
 
@@ -281,7 +281,7 @@ public class ClienteActivity extends AppCompatActivity {
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent pedidos = new Intent(ClienteActivity.this, AcompanharPedidoActivity.class);
+                        Intent pedidos = new Intent(ClienteActivity.this, PedidosActivity.class);
                         startActivity(pedidos);
                     }
                 });

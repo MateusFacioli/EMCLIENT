@@ -1,8 +1,5 @@
 package com.izi.tcccliente.model;
 
-import com.google.firebase.database.DatabaseReference;
-import com.izi.tcccliente.config.ConfiguracaoFirebase;
-
 import java.io.Serializable;
 
 public class ComercianteRecicleView implements Serializable {
@@ -15,10 +12,19 @@ public class ComercianteRecicleView implements Serializable {
     private String senha;
     private Localizacao localizacao;
     private Avaliacao avaliacao;
+    private Reserva reserva;
 
 
 
     public ComercianteRecicleView() {
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
     }
 
     public Avaliacao getAvaliacao() {
