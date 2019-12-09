@@ -59,7 +59,7 @@ public class Activity_Recebido extends AppCompatActivity {
                         .child(idComerciante)
                         .child("avaliacao");
 
-        reference.setValue(this);
+        reference.setValue(avaliacao);
     }
 
     private void inicializarComponentes(){

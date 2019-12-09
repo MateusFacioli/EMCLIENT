@@ -182,7 +182,11 @@ public class CheckoutActivity extends AppCompatActivity {
               carrinho.setCliente(carrinhos.get(i).getCliente());
               carrinho.setComerciante(carrinhos.get(i).getComerciante());
               carrinho.setProduto(carrinhos.get(i).getProduto());
-              carrinho.setStatus("pago");
+              if(carrinho.getComerciante().getReserva() != null) {
+                carrinho.setStatus("reservado");
+              }else {
+                carrinho.setStatus("pago");
+              }
               carrinho.setIdpedido(carrinhos.get(i).getIdpedido());
               carrinho.setDataX(carrinhos.get(i).getDataX());
               carrinho.salvarPedido();

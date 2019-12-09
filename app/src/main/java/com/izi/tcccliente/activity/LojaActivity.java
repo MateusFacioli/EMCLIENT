@@ -62,12 +62,10 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private List<LojaRecicleView> loja = new ArrayList<>();
 
     private Intent iLoja;
-    private Bundle bLoja;
-    private String idComerciante;
     private Toolbar toolbar;
 
     private List<LojaRecicleView> lojaCarrinho = new ArrayList<>();
-    private List<ComercianteRecicleView> comeciante = new ArrayList<>();
+    private ComercianteRecicleView comeciante = new ComercianteRecicleView();
     private List<Cliente> usuario = new ArrayList<>();
     private Carrinho carrinho = new Carrinho();
     private Localizacao localizacao = new Localizacao();
@@ -82,7 +80,6 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
         inicializarComponentes();
         configuraComponentes();
         recuperarProdutos();
-        recuperarComerciante();
         recuperarUsuario();
        // getSupportActionBar().hide();
 
@@ -115,7 +112,7 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                                 String uidProduto = produtoSelecionado.getIdProduto();
                                 lojaIntent.putExtra("uidProduto", uidProduto);
-                                lojaIntent.putExtra("idComerciante", idComerciante);
+                                lojaIntent.putExtra("idComerciante", comeciante.getUid());
                                 carrinho.setProduto(loja.get(position));
                                 carrinho.setStatus("andamento");
                                 carrinho.salvar();
@@ -225,26 +222,7 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
 
-    private void recuperarComerciante(){
-        Query comercianteRef = mDatabase
-                .child("comerciante")
-                .orderByChild("uid").equalTo(idComerciante);
 
-        comercianteRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                comeciante.clear();
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    comeciante.add(ds.getValue(ComercianteRecicleView.class));
-
-                }
-                carrinho.setComerciante(comeciante.get(0));
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
-        });
-    }
 
     private void recuperarUsuario(){
         Query usuarioRef = mDatabase
@@ -268,7 +246,7 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void recuperarProdutos(){
         DatabaseReference produtosRef = mDatabase
                 .child("cardapio")
-                .child(idComerciante);
+                .child(comeciante.getUid());
 
         produtosRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -291,11 +269,11 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
         recycleLoja.setHasFixedSize(true);
         adapterLoja = new AdapterLoja(loja);
         recycleLoja.setAdapter(adapterLoja);
+        comeciante = (ComercianteRecicleView) iLoja.getSerializableExtra("comerciante");
+        carrinho.setComerciante(comeciante);
 
-        if(bLoja != null){
-            idComerciante = bLoja.get("idComerciante").toString();
 
-        }
+
 
     }
     private void inicializarComponentes(){
@@ -305,6 +283,6 @@ public class LojaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // o que é isso?
         iLoja = getIntent();
-        bLoja = iLoja.getExtras();
+
     }
 }

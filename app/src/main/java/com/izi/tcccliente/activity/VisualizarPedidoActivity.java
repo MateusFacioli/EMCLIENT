@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.izi.tcccliente.model.Carrinho;
 import com.squareup.picasso.Picasso;
 import  com.izi.tcccliente.R;
 
@@ -45,7 +46,7 @@ public class VisualizarPedidoActivity extends AppCompatActivity {
 
 
 
-    private List<Pedidos> pedidos = new ArrayList<>();
+    private List<Carrinho> pedidos = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,17 +72,17 @@ public class VisualizarPedidoActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 pedidos.clear();
 
-                Pedidos pedido = new Pedidos();
+                Carrinho pedido = new Carrinho();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     //if(ds.getValue(Pedidos.class).getComerciante().getUid().equals(idComerciante))
 
-                    pedidos.add(ds.getValue(Pedidos.class));
+                    pedidos.add(ds.getValue(Carrinho.class));
                 }
 
                 pedido = pedidos.get(0);
 
-                //txtDate.setText(new Date().toString()); ? nao pode ser a data atual
-                //txtNome.setText();
+                txtDate.setText(pedido.getDataX());
+                txtNome.setText(pedido.getComerciante().getNome());
                 txtItemDoPedido.setText(pedido.getProduto().getNome());
                 txtQuantidadePedido.setText("1");
                 txtValor.setText(pedido.getProduto().getPreco().toString());

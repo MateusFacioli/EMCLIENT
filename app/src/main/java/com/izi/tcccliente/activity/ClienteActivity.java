@@ -109,11 +109,12 @@ public class ClienteActivity extends AppCompatActivity {
                         new RecyclerItemClickListener.OnItemClickListener() {
                             @Override
                             public void onItemClick(View view, int position) {
+                                Bundle bundle = new Bundle();
                                 Intent loja = new Intent(ClienteActivity.this, LojaActivity.class);
                                 ComercianteRecicleView comercianteSelecionado = restaurantes.get(position);
+                                bundle.putSerializable("comerciante",comercianteSelecionado);
+                                loja.putExtras(bundle);
 
-                                String uidComerciante = comercianteSelecionado.getUid();
-                                loja.putExtra("idComerciante", uidComerciante);// dado do comerciante
                                 startActivity(loja);
                                 }
 
