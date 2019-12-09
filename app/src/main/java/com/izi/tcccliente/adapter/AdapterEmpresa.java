@@ -9,8 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
 import com.izi.tcccliente.R;
 import com.izi.tcccliente.activity.ClienteActivity;
+import com.izi.tcccliente.config.ConfiguracaoFirebase;
+import com.izi.tcccliente.helper.UsuarioFirebase;
+import com.izi.tcccliente.model.Avaliacao;
 import com.izi.tcccliente.model.ComercianteRecicleView;
 import com.squareup.picasso.Picasso;
 
@@ -22,7 +26,6 @@ import java.util.List;
 public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHolder> {
 
     private List<ComercianteRecicleView> empresas;
-
 
     public AdapterEmpresa(List<ComercianteRecicleView> empresas) {
         this.empresas = empresas;
@@ -41,6 +44,26 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHo
         ComercianteRecicleView empresa = empresas.get(i);
         holder.nomeEmpresa.setText(empresa.getNome());
 
+//esta sobreescrevendo
+        for(int j=0; j<empresas.size();j++)
+        {
+
+            if(empresas.get(j).getAvaliacao()!=null)//empresas.get(j).getReserva() nao foi
+            {
+                //Avaliacao avaliacao= new Avaliacao();
+                holder.aval.setText(empresas.get(j).getAvaliacao().getComentario()+" "+empresas.get(j).getAvaliacao().getAvaliacao());
+                holder.disp.setText("Horário aberto para prestação dos seus serviços ");
+            }
+            else
+            {
+                holder.aval.setText("Esse comerciante ainda não tem avaliações");
+                holder.disp.setText("Horário aberto para prestação dos seus serviços");
+            }
+        }
+
+
+
+
         //Carregar imagem
       //  String urlImagem = empresa.getUrlImagem();
       //  Picasso.get().load( urlImagem ).into( holder.imagemEmpresa );
@@ -56,12 +79,20 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHo
 
 
         TextView nomeEmpresa;
+        TextView aval;
+        TextView disp;
+
 
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
             nomeEmpresa = itemView.findViewById(R.id.textRestaurante);
+            aval= itemView.findViewById(R.id.aval);
+            disp=itemView.findViewById(R.id.disponibilidade);
+
+
+
 
         }
     }

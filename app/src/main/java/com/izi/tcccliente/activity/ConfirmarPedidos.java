@@ -107,7 +107,7 @@ public class ConfirmarPedidos extends FragmentActivity implements OnMapReadyCall
                 bundle.putSerializable("carrinho", (Serializable) carrinhos);
                 confirmar.putExtras(bundle);
                 startActivity(confirmar);
-                Toast.makeText(ConfirmarPedidos.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(ConfirmarPedidos.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
@@ -273,7 +273,7 @@ public class ConfirmarPedidos extends FragmentActivity implements OnMapReadyCall
         if (e != null) {
            // Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
         }
 
     }

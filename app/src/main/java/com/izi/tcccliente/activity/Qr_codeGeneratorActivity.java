@@ -38,12 +38,26 @@ public class Qr_codeGeneratorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qr_code_generator);
         inicializarComponentes();
+        Double precod =0.0;
+        String clientes="";
+        String produto="";
 
-        CarrinhoActivity carrinhoActivity;
-        carrinhoActivity= new CarrinhoActivity();
-       // String json= carrinhoActivity.getALL();
-       // information.setText(json);
+        for(int i=0; i<carrinhos.size();i++)
+        {
+            precod+=carrinhos.get(i).getProduto().getPreco();
+            clientes+="    Clientes:  "+carrinhos.get(i).getCliente().getEmail() +"    Nome:  "+carrinhos.get(i).getCliente().getNome();
+            produto+="    Produtos:  "+carrinhos.get(i).getProduto().getNome();
+
+        }
+
+        String preco=String.valueOf(precod);
+        String json= clientes;
+        json+=" "+produto;
+        json+="    Total Vendido: R$ "+precod;
+        json+="    Data:  "+carrinhos.get(0).getDataX();
+        information.setText(json);
         String text= information.getText().toString().trim();
+
         if(text!=null){
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
             try {
@@ -71,7 +85,7 @@ public class Qr_codeGeneratorActivity extends AppCompatActivity {
 
 
 
-         //       Toast.makeText(Qr_codeGeneratorActivity.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
+                //       Toast.makeText(Qr_codeGeneratorActivity.this, carrinhos.get(0).getComerciante().getUid(), Toast.LENGTH_SHORT).show();
 
                 Intent inicio = new Intent(Qr_codeGeneratorActivity.this, Activity_Recebido.class);
                 inicio.putExtra("idLoja", carrinhos.get(0).getComerciante().getUid());
