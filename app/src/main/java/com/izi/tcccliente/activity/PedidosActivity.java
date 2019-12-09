@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +20,7 @@ import com.izi.tcccliente.adapter.AdapterEmpresa;
 import com.izi.tcccliente.adapter.AdapterPedidos;
 import com.izi.tcccliente.config.ConfiguracaoFirebase;
 import com.izi.tcccliente.helper.UsuarioFirebase;
+import com.izi.tcccliente.listener.RecyclerItemClickListener;
 import com.izi.tcccliente.model.Carrinho;
 import com.izi.tcccliente.model.ComercianteRecicleView;
 
@@ -40,6 +43,31 @@ public class PedidosActivity extends AppCompatActivity {
         inicializarComponentes();
         configurarComponentes();
         recuperarPedidos();
+
+        recyclerPedidos123.addOnItemTouchListener(
+                new RecyclerItemClickListener(
+                        this,
+                        recyclerPedidos123,
+                        new RecyclerItemClickListener.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                               // Intent loja = new Intent(PedidosActivity.this, Activity Que Vai Mostrar Detalhes do pedido.class);
+                                Carrinho carrinho = carrinhos.get(position);
+
+                            }
+
+                            @Override
+                            public void onLongItemClick(View view, int position) {
+
+                            }
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            }
+                        }
+                )
+        );
     }
 
 

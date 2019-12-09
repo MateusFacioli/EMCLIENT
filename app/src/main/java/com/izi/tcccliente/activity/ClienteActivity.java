@@ -214,6 +214,7 @@ public class ClienteActivity extends AppCompatActivity {
 
                                     restaurantes.add(ds.getValue(ComercianteRecicleView.class));
 
+
                                 }
 
 

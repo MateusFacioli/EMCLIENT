@@ -9,12 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
 import com.izi.tcccliente.R;
 import com.izi.tcccliente.activity.ClienteActivity;
-import com.izi.tcccliente.config.ConfiguracaoFirebase;
-import com.izi.tcccliente.helper.UsuarioFirebase;
-import com.izi.tcccliente.model.Avaliacao;
 import com.izi.tcccliente.model.ComercianteRecicleView;
 import com.squareup.picasso.Picasso;
 
@@ -44,22 +40,18 @@ public class AdapterEmpresa extends RecyclerView.Adapter<AdapterEmpresa.MyViewHo
         ComercianteRecicleView empresa = empresas.get(i);
         holder.nomeEmpresa.setText(empresa.getNome());
 
-//esta sobreescrevendo
-        for(int j=0; j<empresas.size();j++)
-        {
 
-            if(empresas.get(j).getAvaliacao()!=null)//empresas.get(j).getReserva() nao foi
-            {
-                //Avaliacao avaliacao= new Avaliacao();
-                holder.aval.setText(empresas.get(j).getAvaliacao().getComentario()+" "+empresas.get(j).getAvaliacao().getAvaliacao());
-                holder.disp.setText("Horário aberto para prestação dos seus serviços ");
+            if(empresa.getReserva() != null)//empresas.get(j).getReserva() nao foi
+            {   //Avaliacao avaliacao= new Avaliacao();
+                holder.aval.setText(empresa.getAvaliacao().getComentario()+" "+empresa.getAvaliacao().getAvaliacao());
+                holder.disp.setText("Reserva ");
             }
             else
             {
+
                 holder.aval.setText("Esse comerciante ainda não tem avaliações");
                 holder.disp.setText("Horário aberto para prestação dos seus serviços");
             }
-        }
 
 
 
